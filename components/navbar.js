@@ -1,5 +1,6 @@
 "use client"
-import React, { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import Link from 'next/link'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Button from '@mui/material/Button';
@@ -7,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 
-export default function navbar() {
+export default function Navbar() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
