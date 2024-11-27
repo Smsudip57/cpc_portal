@@ -1,11 +1,11 @@
-'use client'
+'use client';  
 import React,{ useState, useContext} from 'react'
 import Navbar from '@/components/navbar'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { MyContext } from '@/context/context';
 
-export default function page() {
+export default function Guest() {
   const [formData, setFormData] = useState({
     name: '',
     batch: '',

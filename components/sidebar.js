@@ -8,7 +8,7 @@ import { MyContext } from '@/context/context';
 
 
 
-export default function sidebar() {
+export default function Sidebar() {
   const router = useRouter();
   const context = useContext(MyContext);
 

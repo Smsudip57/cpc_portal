@@ -24,9 +24,9 @@ export default function committeeHeads() {
             <p className='text-4xl text-stone-800 font-[600] text-right pr-[15%]'>Sudip</p>
             </div>
             <p className='text-justify  text-stone-700 w-4/5 max-w-[1200px]'>
-            <span className='pl-[30%]'></span><span className='text-2xl text-red-400 pr-3' >"</span>
+            <span className='pl-[30%]'></span><span className='text-2xl text-red-400 pr-3' >&quot;</span>
               fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  
-              <span className='text-2xl text-red-400 absolute pl-3'>"</span>
+              <span className='text-2xl text-red-400 absolute pl-3'>&quot;</span>
             </p>
             </div>
         </div>
@@ -38,9 +38,9 @@ export default function committeeHeads() {
             <p className='text-4xl text-stone-800 font-[600] text-right pr-[15%]'>Sudip</p>
             </div>
             <p className='text-justify text-stone-700 w-4/5 max-w-[1200px]'>
-            <span className='pl-[30%]'></span><span className='text-2xl text-red-400 pr-3'>"</span>
+            <span className='pl-[30%]'></span><span className='text-2xl text-red-400 pr-3'>&quot;</span>
               fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd fakdfhasf aksljhdjas  fgsjg fakj sdkjfhasd
-              <span className='text-2xl text-red-400 absolute pl-3'>"</span>
+              <span className='text-2xl text-red-400 absolute pl-3'>&quot;</span>
             </p>
             </div>
         </div>
