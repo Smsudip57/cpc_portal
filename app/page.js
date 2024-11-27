@@ -2,6 +2,7 @@ import Image from "next/image";
 import Navbar from "@/components/navbar";
 import CommitteeHeads from "@/components/committeeHeads";
 import Homeview from "@/components/homeview";
+import Goal from "@/components/goal";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       </div>
       <div className="bg-white w-full h-full">
       <CommitteeHeads />
+      <Goal />
       </div>
     </div>
     

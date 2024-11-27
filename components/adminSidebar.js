@@ -26,16 +26,13 @@ export default function sidebar() {
   };
 
 
-
-
   return (
     <div className='w-[350px] fixed z-[-2] bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3'>
 
         {/* buttons */}
-        <Button variant="text" color='inherit' className='bg-[#80BE92] text-[#027223] text-md font-semibold w-full'>Home</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{display:'flex'}}>News</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Upcoming Events</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Registered Events</Button>
+        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{display:'flex'}}>Publish News</Button>
+        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Publish Events</Button>
+        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Events Participants</Button>
         <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Comittee Members</Button>
         <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full text-left'>Members</Button>
 
