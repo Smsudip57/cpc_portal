@@ -1,63 +1,56 @@
+import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { buffer } from 'micro';
-import dbConnect from '@/connect/dbConnect';
 import User from '@/models/user';
+import dbConnect from '@/connect/dbConnect';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+    apiVersion: '2022-11-15',
+});
 
-export async function POST(req, res) {
-  const sig = req.headers['stripe-signature'];
+export async function POST(request) {
+    const sig = request.headers.get('stripe-signature');
+    const body = await request.text();
 
-  let event;
+    let event;
 
-  try {
-    // Parse the raw body and verify the signature
-    const rawBody = await buffer(req);
-    event = stripe.webhooks.constructEvent(
-      rawBody.toString(),
-      sig,
-      process.env.STRIPE_WEBHOOK_SECRET // Your webhook secret from Stripe dashboard
-    );
-  } catch (err) {
-    console.error('Webhook signature verification failed:', err.message);
-    return res.status(400).send(`Webhook Error: ${err.message}`);
-  }
+    try {
+        event = stripe.webhooks.constructEvent
+            (body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    } catch (err) {
+        return NextResponse.json({ error: `Webhook Error: ${err.message}` }, { status: 400 });
+    }
+    const { type, data } = event;
 
-  // Handle the event
-  const { type, data } = event;
-
-  try {
-    await dbConnect(); // Connect to your database
-
+    // Handle the event
     switch (type) {
-      case 'payment_intent.succeeded':
-        const paymentIntent = data.object; // The payment intent object
-        const transactionId = paymentIntent.id; // The Stripe transaction ID
-        const metadata = paymentIntent.metadata; // Metadata attached to the payment
-
-        const details = JSON.parse(metadata.Details);
-    
-        console.log('Payment succeeded:', transactionId);
-        console.log('Metadata:', metadata);
-
-        if(details.type === 'member'){
-          await User.findOneAndUpdate(
-            { _id: metadata.userId },
-            { 
-              payment: {
+        case 'checkout.session.completed':
+          const paymentIntent = data.object; 
+          const transactionId = paymentIntent.payment_intent; 
+          const metadata = paymentIntent.metadata; 
+  
+          if(metadata && metadata.userId) {
+            const details = JSON.parse(metadata.Details);
+  
+          console.log('Payment succeeded:', transactionId);
+          console.log('Metadata:', metadata);
+  
+          if (details.type === 'member') {
+            await dbConnect();
+            const user = await User.findOne({ _id: metadata.userId });
+            console.log(user);
+            await User.findOneAndUpdate(
+              { _id: metadata.userId },
+              { payment: {
                 status: 'paid',
-                transactionId: transactionId,
+                transactionId: transactionId
               },
               role: 'user'
-            }
-          );
-        }
-
-        break;
+              },
+            );
+          }
+          }
+            break;
     }
-    res.status(200).send('Event processed');
-  } catch (err) {
-    console.error('Error handling webhook event:', err.message);
-    res.status(500).send('Internal server error');
-  }
+
+    return NextResponse.json({ received: true });
 }

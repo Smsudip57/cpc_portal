@@ -29,7 +29,7 @@ export async function POST(req) {
     const response = NextResponse.json({
         success: true,
         message: 'Logged in successfully',    
-        data: { name: user.name, email: user.email, role: user.role },
+        data: { name: user.profile.name, email: user.email, role: user.role },
       });
   
       

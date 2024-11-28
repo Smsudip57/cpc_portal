@@ -68,6 +68,7 @@ export default function Navbar() {
             color='white'
           >
             <AccountCircleIcon fontSize='medium'/>
+            {console.log(context?.user)}
             {
               context?.user?.role === 'guest' ? context?.user?.email : context?.user?.name
             }
