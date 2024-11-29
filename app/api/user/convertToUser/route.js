@@ -32,14 +32,14 @@ export async function POST(req) {
     }
 
     await dbConnect();
-    const user = await User.findOne({ token: decoded._id });
+    const user = await User.findOne({ _id: decoded.userId });
     if (!user) {
       return NextResponse.json(
         { success: false, message: 'User not found!' },
         { status: 404 }
       );
     }
-
+    console.log(user);
     if (user.role !== 'guest') {
       return NextResponse.json(
         { success: false, message: 'Only guests can convert to users.' },
