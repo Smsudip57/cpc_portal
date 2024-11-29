@@ -57,13 +57,13 @@ export default function Navbar() {
 
   
   return (
-    <div className='w-full z-[90] bg-[#01AA4D] fixed top-0 text-black flex  items-center justify-between py-5 px-[5%]'>
-        <Link href='/'>
-        <p className='w-16 overflow-visible text-nowrap cursor-pointer text-xl font-[600] text-white'>DIU Computer Programming Club</p></Link>
-        <div className='flex gap-5 items-center cursor-pointer'>
-            <img className='w-[50px]' src='https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png' width={100} />
-            {/* <p className='text-green-700 text-2xl'>X</p> */}
-            <img className='w-[50px]' src='https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png' width={100} />
+    <div className='w-full z-[90] bg-[#01AA4D] fixed top-0 text-black flex  items-center justify-between py-4 px-[5%]'>
+        <div className='relative w-full flex items-center justify-between'>
+        <Link href='/' >
+        <p className='w-16 overflow-visible text-nowrap cursor-pointer text-xl font-[600] text-white py-[5px] flex'><img className='w-[50px] rounded-full' src='/logo.png' width={100} /> Computer Programming Club</p></Link>
+        <div className="flex gap-5 items-center cursor-pointer absolute left-[50%] transform -translate-x-[50%]"
+        >
+            <img className='w-[45px] rounded-full' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s' width={100} />
         </div>
          <div>
          <Button
@@ -172,6 +172,7 @@ export default function Navbar() {
           </Menu>
             </>
           }
+        </div>
         </div>
     </div>
   )
