@@ -2,10 +2,10 @@
 import React, { useState,useContext, useEffect } from "react";
 import axios from "axios";
 import { MyContext } from "@/context/context";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-export default function Login() {
+export default function Register() {
   const [email, setEmail] = useState(""); 
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false); 
@@ -21,7 +21,7 @@ export default function Login() {
     context.setLogin(true);
 
     try {
-      const response = await axios.post("/api/user/login", { email, password });
+      const response = await axios.post("/api/user/registeruser", { email, password });
       
       if (response.data.success) {
         context.customToast(response.data)
@@ -84,7 +84,7 @@ export default function Login() {
 
         {/* Login Section */}
         <div className="min-w-[600px] text-center text-black flex flex-col justify-center items-center bg-green-400 p-5 rounded-md gap-5">
-          <b className="text-xl font-mono">Login</b>
+          <b className="text-xl font-mono">Register</b>
           <form
             className="text-xs flex flex-col items-center gap-3"
             onSubmit={handleLogin}
@@ -114,8 +114,8 @@ export default function Login() {
               />
             </div>
             <div className="flex justify-between w-full">
-                <p className="text-nowrap underline"><Link href="/forgetpassword">Forget Password?</Link></p>
-                <p className="text-nowrap underline"> <Link href="/forgetpassword">Don&apos;t have an account?</Link></p>
+                <p className="text-nowrap underline"> <Link href="/forgetpassword">Forget Password?</Link></p>
+                <p className="text-nowrap underline"> <Link href="/forgetpassword">Already have an account?</Link></p>
             </div>
             {/* Submit Button */}
             <button
@@ -124,7 +124,7 @@ export default function Login() {
               title="Log In"
               disabled={loading} // Disable button during loading
             >
-              {loading ? "Logging in..." : "Log In"}
+              {loading ? "Registering..." : "Register"}
             </button>
           </form>
         </div>

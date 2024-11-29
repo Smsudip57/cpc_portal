@@ -8,7 +8,10 @@ export default function Home() {
     <div>
         <Navbar/>
         <Sidebar/>
-        Sudip
+        <div className='pt-[100px]'>
+          <p className='text-black mx-[380px]'>May name is sudipMay name is sudip</p>
+
+        </div>
     </div>
   )
 }

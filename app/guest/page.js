@@ -1,5 +1,5 @@
 'use client';  
-import React,{ useState, useContext} from 'react'
+import React,{ useState, useContext, useEffect} from 'react'
 import Navbar from '@/components/navbar'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -46,6 +46,7 @@ export default function Guest() {
 
   // Handle Logout button click
   const handleLogout = async () => {
+    context.setLogin(true);
     try {
       const res  = await axios.get('/api/user/logout', {}, { withCredentials: true });
       context.customToast(res.data);
@@ -55,7 +56,17 @@ export default function Guest() {
     } catch (error) {
       context.customToast({success:false, message:'Something went wrong'});
     }
+    setTimeout(() => context.setLogin(false), 5000);
   };
+
+  useEffect(() => {
+    if(context.user && context?.user?.role !== 'guest'){
+      context.customToast({success:false, message:'Unauthorized!'});
+      console.log(context.user);
+      router.replace('/');
+    }
+  }, [context?.user]);
+  
 
 
 

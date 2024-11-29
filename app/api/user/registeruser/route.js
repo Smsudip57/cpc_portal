@@ -8,7 +8,7 @@ import jwt from 'jsonwebtoken';
 export async function POST(req) {
   try {
     const { email, password, role, name } = await req.json();
-    if(!email || !password || !role || !name) {
+    if(!email || !password ) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
     await dbConnect();
 
@@ -26,9 +26,13 @@ export async function POST(req) {
     if (decoded) {
       currentUser = await User.findById(decoded.userId);
     }
+    if((currentUser && currentUser.role === 'admin') &&(!email || !password || !role || !name)) {
+      return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
+    await dbConnect();
     if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
       return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
     }
+
     
     let actualRole
     if(role !== 'admin' && role !== 'moderator'){

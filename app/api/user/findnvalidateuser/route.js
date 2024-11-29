@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse, NextRequest } from 'next/server';
 import * as cookie from 'cookie';
 import dbConnect from '@/connect/dbConnect'; 
 import User from '@/models/user'; 
@@ -11,7 +11,7 @@ export async function GET(req) {
 
     if (!userToken) {
       return NextResponse.json(
-        { success: false, message: 'Please log in.' },
+        { success: false },
         { status: 401 }
       );
     }
@@ -29,10 +29,18 @@ export async function GET(req) {
     const user = await User.findOne({ _id: userId });
 
     if (!user) {
-      return NextResponse.json(
+      const response = NextResponse.json(
         { success: false, message: 'User not found or token is invalid.' },
         { status: 404 }
       );
+      response.cookies.set('user', '', {
+        httpOnly: true, 
+        secure: true, 
+        sameSite: 'Strict', 
+        maxAge: 0, 
+        path: '/',
+      });
+      return response;
     }
 
     return NextResponse.json({
