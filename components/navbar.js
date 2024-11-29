@@ -66,7 +66,8 @@ export default function Navbar() {
             <img className='w-[45px] rounded-full' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s' width={100} />
         </div>
          <div>
-         <Button
+          
+         {context.loading? <Skeleton height={20} width={150} highlightColor='#BDE9C9' baseColor='#01AA4D'/>:<Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
@@ -77,7 +78,7 @@ export default function Navbar() {
             style={{color:'white'}}
           >
            <Link href='/login'> { !context.loading && !context?.user && 'Login' }</Link>
-          </Button>
+          </Button>}
             
             { 
             context?.user?.role === 'admin' &&

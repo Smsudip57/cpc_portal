@@ -2,7 +2,7 @@
 import React, {useState, useContext} from 'react'
 import { Button } from '@mui/material'
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter,usePathname } from 'next/navigation';
 import { MyContext } from '@/context/context';
 import Link from 'next/link';
 
@@ -11,7 +11,8 @@ import Link from 'next/link';
 export default function Sidebar() {
   const router = useRouter();
   const context = useContext(MyContext);
-  // const [router.pathname, setrouter.pathname] = useState('home');
+  const pathname = usePathname();
+  // const [pathname, setpathname] = useState('home');
 
 
 
@@ -31,7 +32,7 @@ export default function Sidebar() {
 
 
   return (
-    <div className='w-[350px] z-[-2] fixed bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3' style={{fontWeight:'bold'}}>
+    <div className='w-[350px] z-[50] fixed bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3' style={{fontWeight:'bold'}}>
       
 
         {/* buttons */}
@@ -39,7 +40,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/home' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/home' && '#80BE92' }}
         onClick={() => router.replace('/portal/home')}
       >
         Home
@@ -48,7 +49,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/news' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/news' && '#80BE92' }}
         onClick={() => router.replace('/portal/news')}
       >
         News
@@ -57,7 +58,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/upcoming-events' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/upcoming-events' && '#80BE92' }}
         onClick={() => router.replace('/portal/upcoming-events')}
       >
         Upcoming Events
@@ -66,7 +67,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/registered-events' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/registered-events' && '#80BE92' }}
         onClick={() => router.replace('/portal/registered-events')}
       >
         Registered Events
@@ -75,7 +76,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/comittee-members' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/comittee-members' && '#80BE92' }}
         onClick={() => router.replace('/portal/comittee-members')}
       >
         Committee Members
@@ -84,7 +85,7 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: router.pathname === '/portal/members' && '#80BE92' }}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/members' && '#80BE92' }}
         onClick={() => router.replace('/portal/members')}
       >
         Members

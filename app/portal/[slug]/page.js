@@ -4,6 +4,12 @@ import { useRouter } from 'next/navigation';
 import Navbar from '@/components/navbar';
 import Sidebar from '@/components/sidebar';
 import { MyContext} from '@/context/context';
+import Portalhome from '@/components/sidebar/home';
+import Portalnews from '@/components/sidebar/news';
+import Portalmembers from '@/components/sidebar/members';
+import PortalupcomingEvents from '@/components/sidebar/upcomingEvents';
+import Portalcomittee from '@/components/sidebar/comitee';
+import Portalregister from '@/components/sidebar/registeredEvents';
 
 export default function PortalPage({params}) {
   const router = useRouter();
@@ -19,11 +25,19 @@ export default function PortalPage({params}) {
 
     switch (slug) {
       case 'home':
-        return <p>Welcome to the Home page!</p>;
+        return <Portalhome />;
       case 'news':
-        return <p>Welcome to the News page!</p>;
+        return <Portalnews />;
+      case 'members':
+        return <Portalmembers />;
+      case 'upcoming-events':
+        return <PortalupcomingEvents />;
+      case 'comittee':
+        return <Portalcomittee />;
+      case 'registered-events':
+        return <Portalregister />;
       default:
-        return <p>Page not found</p>; 
+        return <Portalhome />; 
     }
   };
 
