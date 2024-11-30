@@ -45,7 +45,7 @@ export default function PortalPage({params}) {
     <div className='text-black'>
       <Navbar />
       <Sidebar />
-      <div className="pt-[100px] mx-[380px]">
+      <div className="pt-[100px] ml-[380px]">
         {renderContent()}
       </div>
     </div>

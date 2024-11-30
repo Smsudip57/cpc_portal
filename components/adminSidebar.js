@@ -1,16 +1,17 @@
 'use client'
-import React, { useContext} from 'react'
+import React, {useState, useContext} from 'react'
 import { Button } from '@mui/material'
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter,usePathname } from 'next/navigation';
 import { MyContext } from '@/context/context';
-
+import Link from 'next/link';
 
 
 
 export default function Sidebar() {
   const router = useRouter();
   const context = useContext(MyContext);
+  const pathname = usePathname();
 
 
 
@@ -28,14 +29,53 @@ export default function Sidebar() {
 
 
   return (
-    <div className='w-[350px] fixed z-[-2] bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3'>
-
+    <div className='w-[350px] fixed z-[50] bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3'>
         {/* buttons */}
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{fontWeight:'600'}} >Publish News</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{fontWeight:'600'}}>Publish Events</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{fontWeight:'600'}}>Events Participants</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{fontWeight:'600'}}>Comittee Members</Button>
-        <Button variant="text" color='inherit'  className=' text-[#027223] text-md font-semibold w-full' style={{fontWeight:'600'}}>Members</Button>
+        <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/publishnews' && '#80BE92' }}
+        onClick={() => router.replace('/admin/publishnews')}
+        >
+          Publish News
+          </Button>
+          <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/publishevents' && '#80BE92' }}
+        onClick={() => router.replace('/admin/publishevents')}
+      >
+          Publish Events
+        </Button>
+        <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/events-participants' && '#80BE92' }}
+        onClick={() => router.replace('/admin/events-participants')}
+      >
+          Events Participants
+        </Button>
+        <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/comittee' && '#80BE92' }}
+        onClick={() => router.replace('/admin/comittee')}
+      >
+          Comittee Members
+          </Button>
+          <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/members' && '#80BE92' }}
+        onClick={() => router.replace('/admin/members')}
+      >
+          Members
+        </Button>
 
 
 
