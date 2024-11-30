@@ -98,7 +98,7 @@ export const POST = async (req) => {
   } catch (error) {
     console.error('Event creation error:', error);
     return NextResponse.json(
-      { success: false, message: 'Failed to create event' },
+      { success: false, message: error.message },
       { status: 500 }
     );
   }
