@@ -14,9 +14,6 @@ const NewsletterList = () => {
       try {
         const res = await axios.get('/api/newsletter/getnewsletter', {  
           withCredentials: true,
-          headers: {
-            'Cache-Control': 'no-store',
-          },
          });
         setNewsletters(res.data.newsletters); // Set newsletters data in state
         console.log(res.data.newsletters);
@@ -37,7 +34,7 @@ const NewsletterList = () => {
           <div key={newsletter._id} className="bg-white p-6 shadow-md rounded-lg">
             {/* Profile section */}
             <div className="flex justify-between items-center mb-4">
-              <div className="flex items-center">
+              {newsletter.createdBy.profile && <div className="flex items-center">
                 <img
                   src={newsletter.createdBy.profile.avatarUrl === 'https://default-avatar-url.com' 
                     ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
@@ -46,7 +43,7 @@ const NewsletterList = () => {
                   className="w-10 h-10 rounded-full mr-4"
                 />
                 <h2 className="text-lg font-semibold">{newsletter.createdBy.profile.name}</h2>
-              </div>
+              </div>}
               <p className="text-sm text-gray-500">{new Date(newsletter.publishedAt).toLocaleDateString()}</p>
             </div>
             

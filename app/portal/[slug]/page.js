@@ -25,8 +25,6 @@ export default function PortalPage({params}) {
         
 
     switch (slug) {
-      case 'home':
-        return <Portalhome />;
       case 'news':
         return <Portalnews />;
       case 'newsletters':
@@ -40,7 +38,7 @@ export default function PortalPage({params}) {
       case 'create-newsletter':
         return <CreateNewsletter />;
       default:
-        return <Portalhome />; 
+        return <Portalnews />; 
     }
   };
 

@@ -115,7 +115,7 @@ export default function Login() {
             </div>
             <div className="flex justify-between w-full">
                 <p className="text-nowrap underline"><Link href="/forgetpassword">Forget Password?</Link></p>
-                <p className="text-nowrap underline"> <Link href="/forgetpassword">Don&apos;t have an account?</Link></p>
+                <p className="text-nowrap underline"> <Link href="/register">Don&apos;t have an account?</Link></p>
             </div>
             {/* Submit Button */}
             <button

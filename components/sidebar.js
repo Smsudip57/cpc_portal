@@ -36,7 +36,7 @@ export default function Sidebar() {
       
 
         {/* buttons */}
-        <Button
+        {/* <Button
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
@@ -44,7 +44,7 @@ export default function Sidebar() {
         onClick={() => router.replace('/portal/home')}
       >
         Home
-      </Button>
+      </Button> */}
       <Button
         variant="text"
         color="inherit"
