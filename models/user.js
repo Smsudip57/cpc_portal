@@ -44,6 +44,9 @@ const userSchema = new mongoose.Schema({
     },
     department: {
       type: String, 
+    },
+    cpc_id:{
+      type: String
     }
   },
   payment:{

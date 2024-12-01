@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
+import Loader from '../loader';
 
 const NewsletterList = () => {
   const [newsletters, setNewsletters] = useState([]);
@@ -24,6 +25,10 @@ const NewsletterList = () => {
     };
     fetchNewsletters();
   }, []);
+
+  if (newsletters.length === 0) {
+    return <Loader />;
+  }
 
   return (
     <div className="max-w-4xl mx-auto p-6 relative">

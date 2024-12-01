@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import { MyContext } from '@/context/context';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Loader from '../loader';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -66,7 +67,7 @@ const NewsList = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return  <Loader/>;
   }
 
   if (error) {

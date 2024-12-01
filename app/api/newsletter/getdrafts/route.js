@@ -53,7 +53,7 @@ export async function GET(req) {
     const drafts = await Newsletter.find({ status: 'Draft' }).sort({ createdAt: -1 });
 
     return NextResponse.json(
-      { success: true, message: 'Draft newsletters retrieved successfully.', drafts },
+      { success: true, drafts },
       { status: 200 }
     );
   } catch (err) {

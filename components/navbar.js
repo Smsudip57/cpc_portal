@@ -60,7 +60,9 @@ export default function Navbar() {
     <div className='w-full z-[90] bg-[#01AA4D] fixed top-0 text-black flex  items-center justify-between py-4 px-[5%]'>
         <div className='relative w-full flex items-center justify-between'>
         <Link href='/' >
-        <p className='w-16 overflow-visible text-nowrap cursor-pointer text-xl font-[600] text-white py-[5px] flex gap-3'><img className='w-[50px] bg-white' src='/logo.png' width={100} /> Computer Programming Club</p></Link>
+        <p className='w-16 overflow-visible text-nowrap cursor-pointer text-xl font-[600] text-white py-[5px] flex gap-3'>
+          {/* <img className='w-[50px] bg-white' src='/logo.png' width={100} />  */}
+          Computer Programming Club</p></Link>
         <div className="flex gap-5 items-center cursor-pointer absolute left-[50%] transform -translate-x-[50%]"
         >
             <img className='w-[45px] rounded-full' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s' width={100} />

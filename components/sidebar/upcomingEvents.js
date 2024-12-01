@@ -5,6 +5,7 @@ import axios from "axios"; // Importing Axios
 import { MyContext } from "@/context/context";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import Loader from "../loader";
 
 const EventList = () => {
   const { user } = useContext(MyContext); // Access the user context to check for admin
@@ -132,7 +133,7 @@ useEffect(() => {
   };
 
   if (loading) {
-    return <div className="text-center text-lg">Loading events...</div>; // Show loading message
+    return  <Loader/>; // Show loading message
   }
 
   return (

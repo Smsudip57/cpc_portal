@@ -3,19 +3,25 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tune } from '@mui/icons-material';
+import { MyContext } from '@/context/context';
+import { useContext } from 'react';
+import Loader from '@/components/loader';
 
 const DraftNewsletterList = () => {
   const [drafts, setDrafts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const context = useContext(MyContext);
 
   useEffect(() => {
     const fetchDrafts = async () => {
       try {
         const res = await axios.get('/api/newsletter/getdrafts', { withCredentials: true });
+        context.customToast(res.data);
         setDrafts(res.data.drafts);
         setLoading(false);
       } catch (err) {
+        context.customToast(err.response.data);
         setError('Failed to fetch drafts. Please try again.');
         setLoading(false);
       }
@@ -31,15 +37,15 @@ const DraftNewsletterList = () => {
         { id: id, action: action },
         { withCredentials: true }
       );
-      alert(res.data.message);
+      context.customToast(res.data);
       // Refresh the draft list after an action
       setDrafts(drafts.filter((draft) => draft._id !== id));
     } catch (err) {
-      alert(err.response?.data?.message || 'An error occurred.');
+      context.customToast(err.response.data);
     }
   };
 
-  if (loading) return <p className="text-center text-lg">Loading drafts...</p>;
+  if (loading) return <Loader/>;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
