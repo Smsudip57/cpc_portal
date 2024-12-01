@@ -165,7 +165,7 @@ useEffect(() => {
             )}
 
             <div className="relative aspect-[16/9]"> {/* Ensure the aspect ratio is square */}
-              <Image
+              <img
                 src={event.image || "/default-image.jpg"} // Default image if no image
                 alt={event.title}
                 width={500}

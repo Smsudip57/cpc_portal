@@ -53,8 +53,9 @@ const NewsList = () => {
   // Handle Delete
   const handleDelete = async (newsId) => {
     try {
-      await axios.delete(`/api/news/${newsId}`, {
+      await axios.delete(`/api/news/deletenews`,{
         withCredentials: true,
+        data: { NewsId: newsId },
       });
       setNews((prevNews) => prevNews.filter((item) => item._id !== newsId));
       content.customToast({ success: true, message: 'News deleted successfully' });
@@ -78,7 +79,7 @@ const NewsList = () => {
         <div key={newsItem._id} className="news-item flex mb-8 border-b pb-8">
           <div className="news-image w-1/3 relative">
             <img src={newsItem.image} alt={newsItem.title} className="w-full h-auto object-cover rounded-lg aspect-square" />
-            {content.user.role === 'admin' && (
+            {content.user && content.user.role === 'admin' && (
               <button
               onClick={() => handleDelete(newsItem._id)}
               className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"

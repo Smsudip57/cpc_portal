@@ -2,17 +2,18 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
-import Event from '@/models/event';
+import News from '@/models/news';
 import User from '@/models/user'; // Your User model
 
 export async function DELETE(req) {
   try {
+      console.log(req.body);
     const body = await req.json();
 
-    const {eventId} =  body
-    if (!eventId) {
+    const {NewsId} =  body
+    if (!NewsId) {
       return NextResponse.json(
-        { success: false, message: 'Event ID is required' },
+        { success: false, message: 'News ID is required' },
         { status: 400 }
       );
     }
@@ -46,18 +47,18 @@ export async function DELETE(req) {
       );
     }
 
-    // Find the event to delete
-    const event = await Event.findById(eventId);
-    if (!event) {
+    // Find the News to delete
+    const news = await News.findById(NewsId);
+    if (!news) {
       return NextResponse.json(
-        { success: false, message: 'Event not found' },
+        { success: false, message: 'News not found' },
         { status: 404 }
       );
     }
 
-    // Delete the event's file from the server
-    // if (event.image) {
-    //   const filePath = path.join(process.cwd(), 'public', event.image);
+    // Delete the News's file from the server
+    // if (News.image) {
+    //   const filePath = path.join(process.cwd(), 'public', News.image);
     //   if (fs.existsSync(filePath)) {
     //     fs.unlinkSync(filePath); // Remove the file
     //   } else {
@@ -65,17 +66,17 @@ export async function DELETE(req) {
     //   }
     // }
 
-    // Delete the event from the database
-    await Event.findByIdAndDelete(eventId);
+    // Delete the News from the database
+    await News.findByIdAndDelete(NewsId);
 
     return NextResponse.json({
       success: true,
-      message: 'Event deleted successfully',
+      message: 'News deleted successfully',
     });
   } catch (error) {
-    console.error('Event deletion error:', error);
+    console.error('News deletion error:', error);
     return NextResponse.json(
-      { success: false, message: 'Failed to delete event' },
+      { success: false, message: 'Failed to delete News' },
       { status: 500 }
     );
   }

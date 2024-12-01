@@ -85,10 +85,10 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/members' && '#80BE92' }}
-        onClick={() => router.replace('/portal/members')}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/portal/newsletters' && '#80BE92' }}
+        onClick={() => router.replace('/portal/newsletters')}
       >
-        Members
+        Newsletter
       </Button>
 
 

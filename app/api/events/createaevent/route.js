@@ -69,11 +69,36 @@ export const POST = async (req) => {
     const filename = `${Date.now()}-${file.name}`;
     const filePath = path.join(UPLOAD_DIR, filename);
 
+
+    //uploading to imgbb
+    const base64Image = buffer.toString('base64');
+
+    const imgbbApiKey = "6814e6d7dce22366f1b8183031526a91"; // Add your ImgBB API key to environment variables
+    const imgbbResponse = await fetch(`https://api.imgbb.com/1/upload?key=${imgbbApiKey}`, {
+      method: 'POST',
+      body: new URLSearchParams({
+        image: base64Image, // Base64 string
+        name: file.name.split('.')[0], // Optional: Name of the image
+      }),
+    });
+    
+
+    const imgbbData = await imgbbResponse.json();
+
+    if (!imgbbData.success) {
+      return NextResponse.json(
+        { success: false, message: 'Failed to upload image to ImgBB' },
+        { status: 500 }
+      );
+    }
+
+    const imageUrl = imgbbData.data.url; // Get the image URL from ImgBB
+
     // Write the file to the server
-    fs.writeFileSync(filePath, buffer);
+    // fs.writeFileSync(filePath, buffer);
 
     // Construct the file URL (relative to the public folder)
-    const imageUrl = `/${filename}`;
+    // const imageUrl = `/${filename}`;
 
     // Create and save the new event in the database
     const newEvent = new Event({

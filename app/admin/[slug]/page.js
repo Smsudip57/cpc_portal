@@ -6,6 +6,7 @@ import Adminbar from '@/components/adminSidebar';
 import { MyContext} from '@/context/context';
 import Publishnews from '@/components/adminbar/publishnews';
 import Publishevents from '@/components/adminbar/publishevents';
+import DraftNewsletterList from '@/components/adminbar/draftnewsletters';
 
 export default function AdminPage({params}) {
   const router = useRouter();
@@ -28,8 +29,8 @@ export default function AdminPage({params}) {
         return <Publishevents />;
       case 'events-participants':
         return <Publishnews />;
-      case 'comittee':
-        return <Publishnews />;
+      case 'draft-newsletters':
+        return <DraftNewsletterList />;
       case 'members':
         return <Publishnews />;
       case 'registered-events':

@@ -62,10 +62,10 @@ export default function Sidebar() {
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
-        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/comittee' && '#80BE92' }}
-        onClick={() => router.replace('/admin/comittee')}
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/draft-newsletters' && '#80BE92' }}
+        onClick={() => router.replace('/admin/draft-newsletters')}
       >
-          Comittee Members
+          Draft Newsletters
           </Button>
           <Button
         variant="text"
