@@ -33,9 +33,10 @@ export async function POST(req) {
 
 
     let cpcId
-    if (!currentUser || !(role === 'admin' && role === 'moderator')) {
-      return NextResponse.json({ success: false, message: 'Only admins and moderators can create admins or moderators' }, { status: 403 });
+    if ((role !== 'admin' && role !== 'moderator') || !currentUser ) {
+      return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
     }else{
+
       cpcId = Math.floor(100000 + Math.random() * 900000).toString();
         if(!name || !roll || !batch || !department || !role){
             return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });
