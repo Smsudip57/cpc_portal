@@ -53,7 +53,7 @@ export default function Register() {
   return (
     <div className="bg-green-200 w-full rounded-md flex justify-center items-center">
       <div className="min-h-[80vh] justify-center flex flex-col gap-16">
-        <div className="min-w-[600px] text-center text-black flex flex-col justify-center items-center bg-green-400 p-5 rounded-md gap-5">
+        <div className="w-full max-w-[600px] text-center text-black flex flex-col justify-center items-center bg-green-400 p-5 rounded-md gap-5">
           <b className="text-xl font-mono">Create User</b>
           <form
             className="text-xs flex flex-col items-center gap-3"

@@ -115,7 +115,7 @@ export default function Register() {
             </div>
             <div className="flex justify-between w-full">
                 <p className="text-nowrap underline"> <Link href="/forgetpassword">Forget Password?</Link></p>
-                <p className="text-nowrap underline"> <Link href="/forgetpassword">Already have an account?</Link></p>
+                <p className="text-nowrap underline"> <Link href="/login">Already have an account?</Link></p>
             </div>
             {/* Submit Button */}
             <button

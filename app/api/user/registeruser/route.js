@@ -33,7 +33,7 @@ export async function POST(req) {
 
 
     let cpcId
-    if (!currentUser || !(role === 'admin' || role === 'moderator')) {
+    if (!currentUser || !(role === 'admin' && role === 'moderator')) {
       return NextResponse.json({ success: false, message: 'Only admins and moderators can create admins or moderators' }, { status: 403 });
     }else{
       cpcId = Math.floor(100000 + Math.random() * 900000).toString();
