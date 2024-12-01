@@ -26,8 +26,6 @@ export async function GET(req) {
       );
     }
 
-    let users
-
     const user = await User.findById(decoded.userId);
     if (!user || !(user.role === 'admin' || user.role === 'moderator')) {
       return NextResponse.json(
@@ -35,11 +33,16 @@ export async function GET(req) {
         { status: 403 }
       );
     }
+    let users
 
 
     // Fetch all users
     await dbConnect();
-    users = await User.find({role: 'user'}).select('-password'); // Exclude password field
+    if(user.role === 'admin'){
+      users = await User.find({}).select('-password'); // Exclude password field
+    }else{
+      users = await User.find({role: 'user'}).select('-password'); // Exclude password field
+    }
 
     return NextResponse.json({ success: true, users });
   } catch (error) {
