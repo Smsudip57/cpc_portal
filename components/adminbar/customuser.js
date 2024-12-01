@@ -37,7 +37,6 @@ export default function Register() {
       });
       if (response.data.success) {
         context.customToast(response.data);
-        context?.setUser(response.data.data);
       } else {
         context.customToast(response.data);
       }

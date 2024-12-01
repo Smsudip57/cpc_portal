@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect,useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { MyContext } from '@/context/context';
 import Loader from '@/components/loader';
@@ -8,28 +8,31 @@ import Loader from '@/components/loader';
 const UserSearch = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
-  const [searchQuery, setSearchQuery] = useState();
+  const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
   const context = useContext(MyContext);
 
   useEffect(() => {
-    // Fetch all users when the component mounts
     const fetchUsers = async () => {
       try {
         const res = await axios.get('/api/user/getuserdata', { withCredentials: true });
         setUsers(res.data.users);
-        context.customToast(res.data);
         setFilteredUsers(res.data.users);
+        context.customToast(res.data);
       } catch (error) {
-        context.customToast(error.response.data);
+        context.customToast(error.response?.data || 'Failed to fetch users');
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchUsers();
   }, []);
 
   useEffect(() => {
     if (!searchQuery) {
-      setFilteredUsers(users); // Reset to all users if no search query
+      setFilteredUsers(users);
     } else {
       setFilteredUsers(
         users.filter((user) =>
@@ -41,8 +44,20 @@ const UserSearch = () => {
     }
   }, [searchQuery, users]);
 
-  if(!users.length) return  <Loader/>;
+  const handleDelete = async (userId) => {
+    try {
+      await axios.delete(`/api/user/deleteuser`, {
+        withCredentials: true,
+        data: { userId },
+      });
+      setUsers((prevUsers) => prevUsers.filter((user) => user._id !== userId));
+      context.customToast({ success: true, message: 'User deleted successfully' });
+    } catch (error) {
+      context.customToast(error.response?.data || 'Failed to delete user');
+    }
+  };
 
+  if (loading) return <Loader />;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -61,27 +76,27 @@ const UserSearch = () => {
 
       <div className="space-y-6">
         {filteredUsers.map((user) => (
-          <div key={user._id} className="bg-white p-6 shadow-md rounded-lg">
-            <h2 className="text-xl font-semibold">{user.profile.name}</h2>
-            <p className="text-sm text-gray-500">Batch: {user.profile.batch}</p>
-            <p className="text-sm text-gray-500">Department: {user.profile.department}</p>
-            <p className="text-sm text-gray-500">Roll: {user.profile.roll}</p>
-            <p className="text-sm text-gray-500">CPC ID: {user.profile.cpc_id}</p>
-          </div>
-        ))}
-        {/* {
-           !searchQuery ? (
-            <p className="text-center py-[10%] text-gray-500">{users.length} users found.</p>
-          ): (filteredUsers.map((user) => (
-            <div key={user._id} className="bg-white p-6 shadow-md rounded-lg">
+          <div key={user._id} className="bg-white p-6 shadow-md rounded-lg flex justify-between items-center">
+            <div>
               <h2 className="text-xl font-semibold">{user.profile.name}</h2>
               <p className="text-sm text-gray-500">Batch: {user.profile.batch}</p>
               <p className="text-sm text-gray-500">Department: {user.profile.department}</p>
               <p className="text-sm text-gray-500">Roll: {user.profile.roll}</p>
               <p className="text-sm text-gray-500">CPC ID: {user.profile.cpc_id}</p>
+              {context.user?.role === 'admin' && (
+                <p className="text-sm text-gray-700">Role: {user.role}</p>
+              )}
             </div>
-          )))
-        } */}
+            {context.user?.role === 'admin' && (
+              <button
+                onClick={() => handleDelete(user._id)}
+                className="bg-red-500 text-white px-3 py-2 rounded hover:bg-red-600"
+              >
+                Delete
+              </button>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );

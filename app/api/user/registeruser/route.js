@@ -12,7 +12,8 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
     await dbConnect();
 
-    const token = req.cookies.get('user');
+    const cookie = req.cookies.get('user').value || '';
+    const token = cookie.split(';')[0].trim();
     if (!token && (role === 'admin' || role === 'moderator')) {
       return NextResponse.json({ success: false, message: 'Authorization required' }, { status: 401 });
     }
@@ -31,21 +32,24 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
 
 
-
-    let cpcId
-    if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
-      return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
-    }else{
-
-      cpcId = Math.floor(100000 + Math.random() * 900000).toString();
-      if(!name || !roll || !batch || !department || !role){
+      let cpcId
+      if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
+        return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
+      }else{
+        
+        cpcId = Math.floor(100000 + Math.random() * 900000).toString();
+        if(!name || !roll || !batch || !department || !role){
           return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });
+        }
       }
-    }
-    
-
-    
-    // let actualRole
+      
+      
+    let actualRole
+      if(currentUser.role === 'admin'){
+        actualRole = role;
+      }else{
+        actualRole = 'guest';
+      }
     // if(role !== 'admin' && role !== 'moderator'){
     //     actualRole = 'guest';
     // }else{
@@ -61,7 +65,7 @@ export async function POST(req) {
     const newUser = new User({
       email,
       password: hashedPassword,
-      role:actualRole,
+      role: actualRole,
       profile: {
         name,
         department,
