@@ -12,7 +12,12 @@ const NewsletterList = () => {
     // Fetch newsletters from the API
     const fetchNewsletters = async () => {
       try {
-        const res = await axios.get('/api/newsletter/getnewsletter', { withCredentials: true });
+        const res = await axios.get('/api/newsletter/getnewsletter', {  
+          withCredentials: true,
+          headers: {
+            'Cache-Control': 'no-store',
+          },
+         });
         setNewsletters(res.data.newsletters); // Set newsletters data in state
         console.log(res.data.newsletters);
       } catch (error) {
