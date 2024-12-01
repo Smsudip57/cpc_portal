@@ -32,7 +32,9 @@ export default function Register() {
     context.setLogin(true);
 
     try {
-      const response = await axios.post("/api/user/registeruser", formData);
+      const response = await axios.post("/api/user/registeruser", formData,{
+        withCredentials: true
+      });
       if (response.data.success) {
         context.customToast(response.data);
         context?.setUser(response.data.data);

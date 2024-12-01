@@ -26,6 +26,8 @@ export async function GET(req) {
       );
     }
 
+    let users
+
     const user = await User.findById(decoded.userId);
     if (!user || !(user.role === 'admin' || user.role === 'moderator')) {
       return NextResponse.json(
@@ -37,7 +39,7 @@ export async function GET(req) {
 
     // Fetch all users
     await dbConnect();
-    const users = await User.find({role: 'user'}).select('-password'); // Exclude password field
+    users = await User.find({role: 'user'}).select('-password'); // Exclude password field
 
     return NextResponse.json({ success: true, users });
   } catch (error) {
