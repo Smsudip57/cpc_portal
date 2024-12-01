@@ -70,7 +70,7 @@ export default function Navbar() {
         </div>
          <div>
           
-         {context.loading? <Skeleton height={20} width={150} highlightColor='#BDE9C9' baseColor='#01AA4D'/>:<Button
+         {context.loading? <Skeleton height={20} width={120} highlightColor='#BDE9C9' baseColor='#01AA4D'/>:<Button
             id="basic-button"
             aria-controls={open ? 'basic-menu' : undefined}
             aria-haspopup="true"
@@ -85,6 +85,37 @@ export default function Navbar() {
             
             { 
             context?.user?.role === 'admin' &&
+            <>
+            <Button
+            id="basic-button"
+            aria-controls={open ? 'basic-menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
+            className='text-white gap-2'
+            color='white'
+            style={{color:'white'}}
+          >
+            <AccountCircleIcon fontSize='medium' color='white' style={{color:'white'}}/>
+            { context?.user?.name }
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            style={{zIndex:91}}
+          >
+            <Link href='/admin'><MenuItem onClick={handleClose}>Admin</MenuItem></Link>
+            <Link href='/portal'><MenuItem onClick={handleClose}>Portal</MenuItem></Link>
+          </Menu>
+            </>
+          }
+            { 
+            context?.user?.role === 'moderator' &&
             <>
             <Button
             id="basic-button"

@@ -60,7 +60,7 @@ const UserSearch = () => {
       </div>
 
       <div className="space-y-6">
-        {/* {filteredUsers.map((user) => (
+        {filteredUsers.map((user) => (
           <div key={user._id} className="bg-white p-6 shadow-md rounded-lg">
             <h2 className="text-xl font-semibold">{user.profile.name}</h2>
             <p className="text-sm text-gray-500">Batch: {user.profile.batch}</p>
@@ -68,8 +68,8 @@ const UserSearch = () => {
             <p className="text-sm text-gray-500">Roll: {user.profile.roll}</p>
             <p className="text-sm text-gray-500">CPC ID: {user.profile.cpc_id}</p>
           </div>
-        ))} */}
-        {
+        ))}
+        {/* {
            !searchQuery ? (
             <p className="text-center py-[10%] text-gray-500">{users.length} users found.</p>
           ): (filteredUsers.map((user) => (
@@ -81,7 +81,7 @@ const UserSearch = () => {
               <p className="text-sm text-gray-500">CPC ID: {user.profile.cpc_id}</p>
             </div>
           )))
-        }
+        } */}
       </div>
     </div>
   );

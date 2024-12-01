@@ -27,7 +27,7 @@ export async function GET(req) {
 
     // Fetch all users
     await dbConnect();
-    const users = await User.find({role: 'admin'}).select('-password'); // Exclude password field
+    const users = await User.find({ role: { $in: ['admin', 'moderator'] } }).select('-password'); // Exclude password field
 
     return NextResponse.json({ success: true, users });
   } catch (error) {

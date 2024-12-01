@@ -8,6 +8,7 @@ import Publishnews from '@/components/adminbar/publishnews';
 import Publishevents from '@/components/adminbar/publishevents';
 import DraftNewsletterList from '@/components/adminbar/draftnewsletters';
 import Members from '@/components/adminbar/memebers';
+import Createcustomuser from '@/components/adminbar/customuser';
 
 export default function AdminPage({params}) {
   const router = useRouter();
@@ -36,6 +37,8 @@ export default function AdminPage({params}) {
         return <Members />;
       case 'registered-events':
         return <Publishnews />;
+      case 'customuser':
+        return <Createcustomuser />;
       default:
         return <Publishnews />; 
     }

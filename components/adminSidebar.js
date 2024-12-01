@@ -76,6 +76,15 @@ export default function Sidebar() {
       >
           Member List 
         </Button>
+          <Button
+        variant="text"
+        color="inherit"
+        className="text-[#027223] text-md font-semibold w-full"
+        style={{ fontWeight: '600', backgroundColor: pathname === '/admin/customuser' && '#80BE92' }}
+        onClick={() => router.replace('/admin/customuser')}
+      >
+          create Customuser
+        </Button>
 
 
 
