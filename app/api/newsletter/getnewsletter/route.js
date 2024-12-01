@@ -30,7 +30,7 @@ export async function GET(req) {
 
     // Fetch newsletters and populate the 'createdBy' field with user details (name and profile picture)
     const newsletters = await Newsletter.find({ publishedAt: { $ne: null } })
-  .populate('createdBy', 'profile.name profile.avatarUrl')  // Populate profile.name and profile.avatarUrl
+  .populate('createdBy', 'profile.name profile.avatarUrl').sort({ publishedAt: -1 });  // Populate profile.name and profile.avatarUrl
   // .sort({ publishedAt: -1 });// Optionally, you can sort newsletters by creation date
 
     return NextResponse.json({
