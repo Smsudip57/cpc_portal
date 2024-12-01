@@ -45,10 +45,10 @@ export default function AdminPage({params}) {
   };
 
   return (
-    <div className='text-black relative'>
+    <div className='text-black relative max-w-screen'>
       <Navbar />
       <Adminbar />
-      <div className="pt-[100px] pl-[380px]">
+      <div className="pt-[100px] pl-[380px] pr-7">
         {renderContent()}
       </div>
     </div>

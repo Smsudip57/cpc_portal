@@ -7,7 +7,7 @@ import jwt from 'jsonwebtoken';
 
 export async function POST(req) {
   try {
-    const { email, password, role, name } = await req.json();
+    const { email, password, role, name, department, roll, batch } = await req.json();
     if(!email || !password ) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
     await dbConnect();
@@ -33,12 +33,16 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
     }
 
-    
+    let cpcId
     let actualRole
     if(role !== 'admin' && role !== 'moderator'){
         actualRole = 'guest';
     }else{
         actualRole = role;
+        cpcId = Math.floor(100000 + Math.random() * 900000).toString();
+        if(!name || !roll || !batch || !department || !role){
+            return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });
+        }
     }
 
     const existingUser = await User.findOne({ email });
@@ -51,7 +55,13 @@ export async function POST(req) {
       email,
       password: hashedPassword,
       role:actualRole,
-      name
+      profile: {
+        name,
+        department,
+        roll,
+        batch,
+        cpc_id: cpcId
+      },
     });
 
     await newUser.save();

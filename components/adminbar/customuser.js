@@ -1,45 +1,60 @@
 "use client";
-import React, { useState,useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 import { MyContext } from "@/context/context";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function Register() {
-  const [email, setEmail] = useState(""); 
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(null);
-  const [success, setSuccess] = useState(false); 
+  const [formData, setFormData] = useState({
+    name: "",
+    roll: "",
+    batch: "",
+    department: "",
+    role: "guest",
+    email: "",
+    password: "",
+  });
+  const [loading, setLoading] = useState(false);
   const context = useContext(MyContext);
   const router = useRouter();
 
-  const handleLogin = async (e) => {
-    e.preventDefault(); 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
     setLoading(true);
-    setError(null); 
     context.setLogin(true);
 
     try {
-      const response = await axios.post("/api/user/registeruser", { email, password });
-      
+      const response = await axios.post("/api/user/registeruser", formData);
       if (response.data.success) {
-        context.customToast(response.data)
-        setSuccess(true); 
+        context.customToast(response.data);
         context?.setUser(response.data.data);
-        if(response.data.data.role === 'guest'){
-          router.push("/guest"); 
-        }else if(response.data.data.role === 'user'){
-          router.push("/portal");
-        }else if(response.data.data.role === 'admin'){
-          router.push("/admin");
+
+        switch (response.data.data.role) {
+          case "guest":
+            router.push("/guest");
+            break;
+          case "user":
+            router.push("/portal");
+            break;
+          case "admin":
+            router.push("/admin");
+            break;
+          default:
+            break;
         }
-        
       } else {
-        setError(response.data.message);
+        context.customToast(response.data);
       }
     } catch (err) {
-      context.customToast(err.response.data)
+      context.customToast(err.response?.data || { success: false, message: "Registration failed." });
     } finally {
       setLoading(false);
       setTimeout(() => {
@@ -48,83 +63,91 @@ export default function Register() {
     }
   };
 
-//   useEffect(() => {
-//     if (context.user && !context.login) {
-//       context.customToast({success:false, message:'Already Logged In!'});
-//       router.replace("/");
-//     }
-//   }, [context.user]);
-
   return (
-    <div className="bg-green-200 min-w-screen min-h-screen flex justify-center items-center">
-      <div className="min-h-[80vh] flex flex-col gap-16">
-        {/* Header Section */}
-        <div
-          className="flex flex-col justify-center items-center gap-8 cursor-pointer"
-          onClick={() => (window.location.href = "/")}
-        >
-          <p className="text-xl font-semibold text-stone-700">
-            DIU Computer Programming Club
-          </p>
-          <div className="logo flex gap-5">
-            <img
-              className="w-[130px]"
-              src="https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png"
-              width={100}
-              alt="Logo 1"
-            />
-            <img
-              className="w-[130px]"
-              src="https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png"
-              width={100}
-              alt="Logo 2"
-            />
-          </div>
-        </div>
-
-        {/* Login Section */}
+    <div className="bg-green-200 w-full rounded-md flex justify-center items-center">
+      <div className="min-h-[80vh] justify-center flex flex-col gap-16">
         <div className="min-w-[600px] text-center text-black flex flex-col justify-center items-center bg-green-400 p-5 rounded-md gap-5">
-          <b className="text-xl font-mono">Register</b>
+          <b className="text-xl font-mono">Create User</b>
           <form
             className="text-xs flex flex-col items-center gap-3"
-            onSubmit={handleLogin}
+            onSubmit={handleRegister}
           >
             <div className="grid gap-3">
-              {/* Email Input */}
               <input
                 type="text"
                 className="w-[350px] py-1 px-2 rounded-sm"
-                placeholder="Email"
-                title="Email"
-                name="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
                 required
               />
-              {/* Password Input */}
+              <div className="w-[350px] flex justify-between">
+                <input
+                  type="text"
+                  className="w-[30%] py-1 px-2 rounded-sm"
+                  placeholder="Roll"
+                  name="roll"
+                  value={formData.roll}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  className="w-[30%] py-1 px-2 rounded-sm"
+                  placeholder="Batch"
+                  name="batch"
+                  value={formData.batch}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="text"
+                  className="w-[30%] py-1 px-2 rounded-sm"
+                  placeholder="Department"
+                  name="department"
+                  value={formData.department}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <select
+                className="w-[350px] py-1 px-2 rounded-sm"
+                name="role"
+                value={formData.role}
+                onChange={handleChange}
+                required
+              >
+                <option value="guest">Guest</option>
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="moderator">Moderator</option>
+              </select>
+              <input
+                type="email"
+                className="w-[350px] py-1 px-2 rounded-sm"
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
               <input
                 type="password"
                 className="w-[350px] py-1 px-2 rounded-sm"
                 placeholder="Password"
-                title="Password"
                 name="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                value={formData.password}
+                onChange={handleChange}
                 required
               />
             </div>
-            <div className="flex justify-between w-full">
-                <p className="text-nowrap underline"> <Link href="/forgetpassword">Forget Password?</Link></p>
-                <p className="text-nowrap underline"> <Link href="/forgetpassword">Already have an account?</Link></p>
-            </div>
-            {/* Submit Button */}
             <button
               type="submit"
-              className="bg-blue-700 text-sm py-1 px-3 w-max text-white rounded-md mt-8"
-              title="Log In"
-              disabled={loading} // Disable button during loading
+              className="bg-blue-700 text-sm py-1 px-3 w-max text-white rounded-md mt-4"
+              disabled={loading}
             >
-              {loading ? "Registering..." : "Register"}
+              {loading ? "Creating..." : "Create"}
             </button>
           </form>
         </div>
