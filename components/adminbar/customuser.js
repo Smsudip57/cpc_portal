@@ -62,6 +62,7 @@ export default function Register() {
       }, 5000);
     }
   };
+  
 
   return (
     <div className="bg-green-200 w-full rounded-md flex justify-center items-center">
