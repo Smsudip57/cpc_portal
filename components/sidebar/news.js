@@ -54,7 +54,7 @@ const NewsList = () => {
   // Handle Delete
   const handleDelete = async (newsId) => {
     try {
-      await axios.delete(`/api/news/deletenews`,{
+      await axios.delete(`/api/news/deletenews`, {
         withCredentials: true,
         data: { NewsId: newsId },
       });
@@ -67,7 +67,7 @@ const NewsList = () => {
   };
 
   if (loading) {
-    return  <Loader/>;
+    return <Loader />;
   }
 
   if (error) {
@@ -82,24 +82,39 @@ const NewsList = () => {
             <img src={newsItem.image} alt={newsItem.title} className="w-full h-auto object-cover rounded-lg aspect-square" />
             {content.user && content.user.role === 'admin' && (
               <button
-              onClick={() => handleDelete(newsItem._id)}
-              className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
-            >
-              <DeleteIcon/>
-            </button>
+                onClick={() => handleDelete(newsItem._id)}
+                className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600"
+              >
+                <DeleteIcon />
+              </button>
             )}
           </div>
           <div className="news-details w-2/3 pl-6">
             <h2 className="text-2xl font-bold mb-4">{newsItem.title}</h2>
-            <p className="text-lg mb-4">{newsItem.description}</p>
+            <p
+              className="text-lg mb-4"
+              style={{ whiteSpace: 'pre-wrap' }} // Preserve spaces and new lines
+            >
+              {newsItem.description}
+            </p>
             <div className="social-links">
               {newsItem.facebook && (
-                <a href={newsItem.facebook} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline mr-4">
+                <a
+                  href={newsItem.facebook}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline mr-4"
+                >
                   Facebook Link
                 </a>
               )}
               {newsItem.diu && (
-                <a href={newsItem.diu} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:underline">
+                <a
+                  href={newsItem.diu}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
                   DIU Link
                 </a>
               )}

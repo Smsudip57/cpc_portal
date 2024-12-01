@@ -204,7 +204,7 @@ useEffect(() => {
               .filter((event) => event._id === selectedEventId)
               .map((event) => (
                 <div key={event._id}>
-                  <Image
+                  <img
                     src={event.image || "/default-image.jpg"} 
                     alt={event.title}
                     width={500}

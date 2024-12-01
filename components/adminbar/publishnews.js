@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { MyContext } from "@/context/context";
 
@@ -29,6 +29,7 @@ const CreateNewsForm = () => {
   };
 
   const handleSubmit = async (e) => {
+    console.log(formData);
     e.preventDefault();
 
     const formDataToSend = new FormData();
@@ -41,7 +42,7 @@ const CreateNewsForm = () => {
     try {
       const response = await axios.post("/api/news/createnews", formDataToSend, {
         headers: {
-          "Content-Type": "multipart/form-data",  // Set content type for file upload
+          "Content-Type": "multipart/form-data",
         },
         withCredentials: true,
       });
@@ -54,7 +55,6 @@ const CreateNewsForm = () => {
           diu: "",
           image: null,
         });
-      } else {
       }
     } catch (error) {
       console.error("Error creating news:", error);
@@ -84,6 +84,7 @@ const CreateNewsForm = () => {
           onChange={handleInputChange}
           required
           className="w-full p-2 border border-gray-300 rounded-md"
+          style={{ whiteSpace: "pre-wrap" }} // Preserve spaces and new lines
         />
       </div>
 
@@ -128,6 +129,14 @@ const CreateNewsForm = () => {
           Submit News
         </button>
       </div>
+
+      {/* Display the Description with whitespace preserved */}
+      {formData.description && (
+        <div className="mt-6 p-4 border border-gray-300 rounded-md bg-gray-50">
+          <h3 className="text-lg font-semibold mb-2">Preview:</h3>
+          <div style={{ whiteSpace: "pre-wrap" }}>{formData.description}</div>
+        </div>
+      )}
     </form>
   );
 };

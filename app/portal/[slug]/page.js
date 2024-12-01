@@ -31,7 +31,7 @@ export default function PortalPage({params}) {
         return <Portalnewsletters />;
       case 'upcoming-events':
         return <PortalupcomingEvents />;
-      case 'comittee':
+      case 'comittee-members':
         return <Portalcomittee />;
       case 'registered-events':
         return <Portalregister />;
