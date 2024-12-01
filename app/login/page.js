@@ -33,6 +33,8 @@ export default function Login() {
           router.push("/portal");
         }else if(response.data.data.role === 'admin'){
           router.push("/admin");
+        }else if(response.data.data.role === 'moderator'){
+          router.push("/admin");
         }
         
       } else {

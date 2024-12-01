@@ -36,20 +36,6 @@ export default function Register() {
       if (response.data.success) {
         context.customToast(response.data);
         context?.setUser(response.data.data);
-
-        switch (response.data.data.role) {
-          case "guest":
-            router.push("/guest");
-            break;
-          case "user":
-            router.push("/portal");
-            break;
-          case "admin":
-            router.push("/admin");
-            break;
-          default:
-            break;
-        }
       } else {
         context.customToast(response.data);
       }
@@ -62,7 +48,7 @@ export default function Register() {
       }, 5000);
     }
   };
-  
+
 
   return (
     <div className="bg-green-200 w-full rounded-md flex justify-center items-center">

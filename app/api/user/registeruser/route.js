@@ -77,7 +77,7 @@ export async function POST(req) {
         data: { name: newUser.name, email: newUser.email, role: newUser.role },
       });
   
-      if(usertoken){
+      if(usertoken && !cpcId){
         response.cookies.set('user', `${usertoken}; HttpOnly; Path=/; Max-Age=2592000; Secure; SameSite=Strict`);
       }
   
