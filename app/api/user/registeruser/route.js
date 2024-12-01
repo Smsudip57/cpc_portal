@@ -26,24 +26,30 @@ export async function POST(req) {
     if (decoded) {
       currentUser = await User.findById(decoded.userId);
     }
+
     if((currentUser && currentUser.role === 'admin') &&(!email || !password || !role || !name)) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
-    await dbConnect();
-    if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
-      return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
-    }
+
+
 
     let cpcId
-    let actualRole
-    if(role !== 'admin' && role !== 'moderator'){
-        actualRole = 'guest';
+    if (!currentUser || !(role === 'admin' || role === 'moderator')) {
+      return NextResponse.json({ success: false, message: 'Only admins and moderators can create admins or moderators' }, { status: 403 });
     }else{
-        actualRole = role;
-        cpcId = Math.floor(100000 + Math.random() * 900000).toString();
+      cpcId = Math.floor(100000 + Math.random() * 900000).toString();
         if(!name || !roll || !batch || !department || !role){
             return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });
         }
+
     }
+
+    
+    // let actualRole
+    // if(role !== 'admin' && role !== 'moderator'){
+    //     actualRole = 'guest';
+    // }else{
+    //     actualRole = role;
+    // }
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
