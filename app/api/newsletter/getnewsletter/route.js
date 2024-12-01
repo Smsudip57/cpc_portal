@@ -16,6 +16,10 @@ export async function GET(req) {
     return NextResponse.json({
       success: true,
       newsletters,
+    }, {
+      headers: {
+        'Cache-Control': 'no-store', // This tells Vercel to not cache the response
+      },
     });
   } catch (error) {
     console.error('Error fetching newsletters:', error);

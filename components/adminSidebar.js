@@ -74,7 +74,7 @@ export default function Sidebar() {
         style={{ fontWeight: '600', backgroundColor: pathname === '/admin/members' && '#80BE92' }}
         onClick={() => router.replace('/admin/members')}
       >
-          Members
+          Member List 
         </Button>
 
 
