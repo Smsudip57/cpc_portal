@@ -33,7 +33,7 @@ export async function POST(req) {
 
 
       let cpcId
-      if(role === 'admin' ){
+      if(currentUser.role === 'admin' ){
         cpcId = Math.floor(100000 + Math.random() * 900000).toString();
       }
       if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
