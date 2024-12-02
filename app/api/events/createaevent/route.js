@@ -105,15 +105,16 @@ export const POST = async (req) => {
       title,
       description,
       start,
-      end,
+      end:lastdate,
       teamMembers,
       regFee,
-      lastdate,
+      lastdate:end,
       image: imageUrl, // Store the image URL
       createdBy: decoded.userId,  // Use the userId from the decoded JWT
     });
 
     await newEvent.save();
+    console.log(newEvent);
 
     return NextResponse.json({
       success: true,

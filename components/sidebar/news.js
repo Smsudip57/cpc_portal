@@ -10,6 +10,12 @@ const NewsList = () => {
   const [error, setError] = useState(null);
   const content = useContext(MyContext);
   const [userId, setUserId] = useState(); // Set this based on logged-in user
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
+
 
   useEffect(() => {
     const fetchNews = async () => {
@@ -33,14 +39,21 @@ const NewsList = () => {
   // Handle Upvote/Downvote
   const handleVote = async (newsId, vote) => {
     try {
+      // Send the vote to the backend
       await axios.post('/api/news/vote', { newsId, vote });
+  
+      // Update the state with new vote values
       setNews((prevNews) =>
         prevNews.map((item) =>
           item._id === newsId
             ? {
                 ...item,
-                upvotes: vote ? [...item.upvotes, userId] : item.upvotes.filter((id) => id !== userId),
-                downvotes: !vote ? [...item.downvotes, userId] : item.downvotes.filter((id) => id !== userId),
+                upvotes: vote
+                  ? [...new Set([...item.upvotes, userId])]  // Ensure no duplicate votes
+                  : item.upvotes.filter((id) => id !== userId), // Remove user's vote
+                downvotes: !vote
+                  ? [...new Set([...item.downvotes, userId])]  // Ensure no duplicate votes
+                  : item.downvotes.filter((id) => id !== userId), // Remove user's vote
               }
             : item
         )
@@ -50,7 +63,7 @@ const NewsList = () => {
       content.customToast(error.response.data);
     }
   };
-
+  
   // Handle Delete
   const handleDelete = async (newsId) => {
     try {
@@ -91,12 +104,28 @@ const NewsList = () => {
           </div>
           <div className="news-details w-2/3 pl-6">
             <h2 className="text-2xl font-bold mb-4">{newsItem.title}</h2>
-            <p
-              className="text-lg mb-4"
-              style={{ whiteSpace: 'pre-wrap' }} // Preserve spaces and new lines
-            >
-              {newsItem.description}
-            </p>
+            <div className="relative">
+                    <p
+                      className={`text-gray-600 mt-2 ${
+                        isExpanded ? "" : "line-clamp-3"
+                      }`}
+                      style={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        WebkitLineClamp: isExpanded ? "none" : 8,
+                        whiteSpace: "pre-wrap", // Ensures text formatting is preserved
+                      }}
+                    >{newsItem?.description}</p>
+                    {newsItem?.description.length > 100 && ( // Adjust length threshold if needed
+                      <button
+                        onClick={toggleExpanded}
+                        className="text-blue-500 mt-1 text-sm"
+                      >
+                        {isExpanded ? "See less" : "See more"}
+                      </button>
+                    )}
+                  </div>
             <div className="social-links">
               {newsItem.facebook && (
                 <a

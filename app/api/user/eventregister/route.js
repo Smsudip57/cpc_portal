@@ -37,7 +37,7 @@ export async function POST(req) {
       return NextResponse.json({ message: 'Event not found' }, { status: 404 });
     }
 
-    const { regFee } = event;
+    const { regFee, participants } = event;
 
     const participantIds = [];
 
@@ -56,6 +56,11 @@ export async function POST(req) {
       if (!participant) {
         return NextResponse.json({ success: false, message: `Member ${member.name} not found` }, { status: 404 });
       }
+
+      if (event.participants.includes(participant._id)) {
+        return NextResponse.json({ success: false, message: `Member ${member.name} is already registered for this event` }, { status: 400 });
+      }
+    
 
       participantIds.push(participant._id);
     }

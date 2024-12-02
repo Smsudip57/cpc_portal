@@ -29,7 +29,8 @@
     "react-draft-wysiwyg": "^1.15.0",
     "react-loading-skeleton": "^3.5.0",
     "react-toastify": "^10.0.6",
-    "stripe": "^17.4.0"
+    "stripe": "^17.4.0",
+    "swiper": "^11.1.15"
   },
   "devDependencies": {
     "eslint": "^8",
