@@ -33,7 +33,7 @@ export async function POST(req) {
 
 
       let cpcId
-      if(currentUser.role === 'admin' ){
+      if(currentUser && currentUser.role === 'admin' ){
         cpcId = Math.floor(100000 + Math.random() * 900000).toString();
       }
       if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
@@ -44,7 +44,7 @@ export async function POST(req) {
       
       
     let actualRole
-      if(currentUser.role === 'admin'){
+      if(currentUser && currentUser.role === 'admin'){
         actualRole = role;
       }else{
         actualRole = 'guest';
@@ -68,7 +68,7 @@ export async function POST(req) {
       profile: {
         name,
         department,
-        roll:actualRole,
+        roll,
         batch,
         cpc_id: cpcId
       },
