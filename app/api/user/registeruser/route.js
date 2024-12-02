@@ -68,7 +68,7 @@ export async function POST(req) {
       profile: {
         name,
         department,
-        roll,
+        roll:actualRole,
         batch,
         cpc_id: cpcId
       },
