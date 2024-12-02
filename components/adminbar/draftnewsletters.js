@@ -1,10 +1,8 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Tune } from '@mui/icons-material';
 import { MyContext } from '@/context/context';
-import { useContext } from 'react';
 import Loader from '@/components/loader';
 
 const DraftNewsletterList = () => {
@@ -18,10 +16,10 @@ const DraftNewsletterList = () => {
       try {
         const res = await axios.get('/api/newsletter/getdrafts', { withCredentials: true });
         context.customToast(res.data);
-        setDrafts(res.data.drafts);
+        setDrafts(res.data?.drafts ?? []);
         setLoading(false);
       } catch (err) {
-        context.customToast(err.response.data);
+        context.customToast(err.response?.data ?? "Error fetching drafts.");
         setError('Failed to fetch drafts. Please try again.');
         setLoading(false);
       }
@@ -34,51 +32,51 @@ const DraftNewsletterList = () => {
     try {
       const res = await axios.post(
         `/api/newsletter/action`,
-        { id: id, action: action },
+        { id, action },
         { withCredentials: true }
       );
       context.customToast(res.data);
-      // Refresh the draft list after an action
-      setDrafts(drafts.filter((draft) => draft._id !== id));
+      setDrafts((prevDrafts) => prevDrafts.filter((draft) => draft._id !== id));
     } catch (err) {
-      context.customToast(err.response.data);
+      context.customToast(err.response?.data ?? "Error performing action.");
     }
   };
 
-  if (loading) return <Loader/>;
+  if (loading) return <Loader />;
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-8">Draft Newsletters</h1>
       <div className="space-y-6">
-        {drafts.map((draft) => (
+        {drafts?.map((draft) => (
           <div key={draft._id} className="bg-white shadow-md rounded-lg overflow-hidden">
-            {draft.image && (
+            {draft?.image && (
               <img
-                src={draft.image}
+                src={draft?.image}
                 alt="Draft Image"
                 className="w-full h-64 object-cover"
               />
             )}
             <div className="p-6">
-              <h2 className="text-2xl font-bold text-gray-800 mb-2">{draft.title}</h2>
-              <p className="text-sm font-semibold text-blue-600 mb-4">Category: {draft.category}</p>
-              <div className="flex items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">{draft?.title}</h2>
+              <p className="text-sm font-semibold text-blue-600 mb-4">Category: {draft?.category}</p>
+              {/* <div className="flex items-center mb-4">
                 <img
-                  src={draft.createdBy.profile.avatarUrl === 'https://default-avatar-url.com' 
-                    ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
-                    : newsletter.createdBy.profile.avatarUrl}
-                  alt={draft.createdBy.name}
+                  src={draft?.createdBy?.profile?.avatarUrl ?? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png'}
+                  alt={draft?.createdBy?.name}
                   className="w-12 h-12 rounded-full mr-4"
-                />
+                  />
+                  {console.log(draft?.createdBy)}
                 <div>
-                  <h3 className="text-lg font-semibold">{draft.createdBy.name}</h3>
-                  <p className="text-sm text-gray-500">Created at {new Date(draft.createdAt).toLocaleDateString()}</p>
+                  <h3 className="text-lg font-semibold">{draft?.createdBy?.profile?.name}</h3>
+                  <p className="text-sm text-gray-500">Created at {new Date(draft?.createdAt).toLocaleDateString()}</p>
                 </div>
-              </div>
+              </div> */}
               <div className="text-base text-gray-700 mb-4">
-                <p>{draft.content}</p>
+                <p className=''
+                style={{whiteSpace: 'pre-line'}}
+                >{draft?.content}</p>
               </div>
               <div className="flex justify-end space-x-4">
                 <button

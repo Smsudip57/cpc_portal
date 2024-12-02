@@ -83,6 +83,7 @@ export async function POST(req) {
           userId: user._id.toString(),
           Details: JSON.stringify({ 
             type:'event',
+            eventId: event._id.toString(),
             data: participantIds
           }), 
         },

@@ -51,7 +51,12 @@ export async function POST(request) {
             await dbConnect();
             console.log(details);
             const event = await Event.findOne({ _id: details.eventId });
-            event.participants = [...new Set([...event.participants, ...details.data])]; // Avoid duplicate IDs
+            console.log(event);
+            if (Array.isArray(event?.participants)) {
+              event.participants = [...new Set([...event.participants, ...details.data])]; // Avoid duplicate IDs
+            } else {
+              event.participants = [...new Set([...details.data])]; // Initialize with details data if undefined
+            }
             await event.save();
           }
           }

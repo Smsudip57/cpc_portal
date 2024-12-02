@@ -123,9 +123,10 @@ const CreateNewsletter = () => {
         </div>
 
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image (optional):</label>
+          <label htmlFor="image" className="block text-sm font-medium text-gray-700">Image:</label>
           <input
             type="file"
+            required
             id="image"
             name="image"
             accept="image/*"

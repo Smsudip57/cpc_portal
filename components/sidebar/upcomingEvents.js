@@ -16,6 +16,11 @@ const EventList = () => {
   const [formData, setFormData] = useState({});
   const context = useContext(MyContext);
   const router = useRouter();
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpanded = () => {
+    setIsExpanded(!isExpanded);
+  };
 
 // Initialize when `selectedEventId` or `events` changes
 useEffect(() => {
@@ -159,14 +164,14 @@ useEffect(() => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
         {!selectedEventId && events.map((event) => (
           <div
-            key={event._id}
-            className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 relative ${selectedEventId === event._id ? "hidden" : ""}`}
-            onClick={() => handleEventClick(event._id)} // Handle event click
+            key={event?._id}
+            className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 relative ${selectedEventId === event?._id ? "hidden" : ""}`}
+            onClick={() => handleEventClick(event?._id)} // Handle event click
           >
             {/* Show delete button only if the user is an admin */}
             {user?.role === "admin" && (
               <button
-                onClick={(e) => { e.stopPropagation(); handleDelete(event._id); }} // Prevent event click
+                onClick={(e) => { e.stopPropagation(); handleDelete(event?._id); }} // Prevent event click
                 className="absolute z-50 top-2 right-2 bg-red-500 text-white p-1 rounded-md hover:bg-red-600 focus:outline-none"
               >
                 <DeleteIcon />
@@ -175,8 +180,8 @@ useEffect(() => {
 
             <div className="relative aspect-[16/9]"> {/* Ensure the aspect ratio is square */}
               <img
-                src={event.image || "/default-image.jpg"} // Default image if no image
-                alt={event.title}
+                src={event?.image || "/default-image.jpg"} // Default image if no image
+                alt={event?.title}
                 width={500}
                 height={500} // Set both width and height to create a square image
                 layout="responsive"
@@ -184,18 +189,18 @@ useEffect(() => {
               />
             </div>
             <div className="p-4">
-              <h3 className="text-xl font-semibold text-gray-800">{event.title}</h3>
+              <h3 className="text-xl font-semibold text-gray-800">{event?.title}</h3>
               <p className="mt-2 text-gray-600 text-sm">
-                {event.description.slice(0, 100)}... {/* Truncate text if not expanded */}
+                {event?.description.slice(0, 100)}... {/* Truncate text if not expanded */}
               </p>
               <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
-                <span>{new Date(event.start).toLocaleDateString()} -{" "}
-                {new Date(event.end).toLocaleDateString()}</span>
+                <span>{new Date(event?.start).toLocaleDateString()} -{" "}
+                {new Date(event?.end).toLocaleDateString()}</span>
                 
               </div>
               <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
-                <span className="text-red-700">Last Date: {event.lastdate ? new Date(event.lastdate).toLocaleDateString(): "N/A"}</span>
-                <span className="font-semibold text-blue-600">৳{event.regFee ? event.regFee : "Free"}</span>
+                <span className="text-red-700">Last Date: {event?.lastdate ? new Date(event?.lastdate).toLocaleDateString(): "N/A"}</span>
+                <span className="font-semibold text-blue-600">৳{event?.regFee ? event.regFee : "Free"}</span>
               </div>
             </div>
           </div>
@@ -213,19 +218,40 @@ useEffect(() => {
               .map((event) => (
                 <div key={event._id}>
                   <img
-                    src={event.image || "/default-image.jpg"} 
+                    src={event?.image || "/default-image.jpg"} 
                     alt={event.title}
                     width={500}
                     height={500} 
                     layout="responsive"
                     className="object-cover aspect-[16/9] mb-8 rounded-md w-full h-full"
                   />
-                  <h2 className="text-2xl font-bold text-gray-800">{event.title}</h2>
-                  <p className="mt-2 text-gray-600">{event.description}</p>
+                  <h2 className="text-2xl font-bold text-gray-800">{event?.title}</h2>
+                  <div className="relative">
+                    <p
+                      className={`text-gray-600 mt-2 ${
+                        isExpanded ? "" : "line-clamp-3"
+                      }`}
+                      style={{
+                        display: "-webkit-box",
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                        WebkitLineClamp: isExpanded ? "none" : 3,
+                        whiteSpace: "pre-wrap", // Ensures text formatting is preserved
+                      }}
+                    >{event.description}</p>
+                    {event.description.length > 100 && ( // Adjust length threshold if needed
+                      <button
+                        onClick={toggleExpanded}
+                        className="text-blue-500 mt-1 text-sm"
+                      >
+                        {isExpanded ? "See less" : "See more"}
+                      </button>
+                    )}
+                  </div>
                   <div className="mt-4 text-sm text-gray-500 flex justify-between">
-                    <span>{new Date(event.start).toLocaleDateString()} -{" "}
-                    {new Date(event.end).toLocaleDateString()}</span>
-                    <span className="font-semibold text-blue-600">৳{event.regFee ? event.regFee : "Free"}</span>
+                    <span>{new Date(event?.start).toLocaleDateString()} -{" "}
+                    {new Date(event?.end).toLocaleDateString()}</span>
+                    <span className="font-semibold text-blue-600">৳{event?.regFee ? event?.regFee : "Free"}</span>
                   </div>
                 </div>
               ))}
