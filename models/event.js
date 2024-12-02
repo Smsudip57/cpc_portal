@@ -35,7 +35,13 @@ const eventSchema = new mongoose.Schema({
     },
     regFee: {
       type: Number,
-    }
+    },
+    participants: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+      },
+    ]
 });
 
 

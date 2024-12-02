@@ -66,7 +66,9 @@ const DraftNewsletterList = () => {
               <p className="text-sm font-semibold text-blue-600 mb-4">Category: {draft.category}</p>
               <div className="flex items-center mb-4">
                 <img
-                  src={draft.createdBy.avatarUrl || '/default-avatar.png'}
+                  src={draft.createdBy.profile.avatarUrl === 'https://default-avatar-url.com' 
+                    ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
+                    : newsletter.createdBy.profile.avatarUrl}
                   alt={draft.createdBy.name}
                   className="w-12 h-12 rounded-full mr-4"
                 />

@@ -47,6 +47,9 @@ const userSchema = new mongoose.Schema({
     },
     cpc_id:{
       type: String
+    },
+    contact:{
+      type: Number
     }
   },
   payment:{

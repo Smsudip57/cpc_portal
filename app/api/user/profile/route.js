@@ -26,30 +26,27 @@ export async function GET(req) {
     }
     const userId = decoded.userId;
     await dbConnect();
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId }).select('-password -payment -_id');
+
 
     if (!user) {
       const response = NextResponse.json(
         { success: false, message: 'User not found or token is invalid.' },
         { status: 404 }
       );
-      // response.cookies.set('user', '', {
-      //   httpOnly: true, 
-      //   secure: true, 
-      //   sameSite: 'Strict', 
-      //   maxAge: 0, 
-      //   path: '/',
-      // });
+    //   response.cookies.set('user', '', {
+    //     httpOnly: true, 
+    //     secure: true, 
+    //     sameSite: 'Strict', 
+    //     maxAge: 0, 
+    //     path: '/',
+    //   });
       return response;
     }
 
     return NextResponse.json({
       success: true,
-      data: {
-        name: user.profile.name,
-        role: user.role,
-        email: user.email,
-      }
+      user
     });
   } catch (error) {
     console.error('Error finding and validating user:', error);

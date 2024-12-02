@@ -6,6 +6,7 @@ import { MyContext } from "@/context/context";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Loader from "../loader";
+import { useRouter } from "next/navigation";
 
 const EventList = () => {
   const { user } = useContext(MyContext); // Access the user context to check for admin
@@ -14,6 +15,7 @@ const EventList = () => {
   const [selectedEventId, setSelectedEventId] = useState(null); // Track selected event
   const [formData, setFormData] = useState({});
   const context = useContext(MyContext);
+  const router = useRouter();
 
 // Initialize when `selectedEventId` or `events` changes
 useEffect(() => {
@@ -92,12 +94,18 @@ useEffect(() => {
     }
   
     try {
-      const response = await axios.post("/api/submit", formData, {
+      const response = await axios.post("/api/user/eventregister", { ...formData, eventId: selectedEventId }, {
         headers: {
           "Content-Type": "application/json",
         },
         withCredentials: true,
       });
+  
+      if (response.data.url) {
+        router.push(response.data.url);
+        
+        // setFormData({});
+      }
   
       // Handle success response
       context.customToast({ success: true, message: "Form submitted successfully!" });

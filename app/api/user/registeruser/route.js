@@ -12,8 +12,8 @@ export async function POST(req) {
       return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });}
     await dbConnect();
 
-    const cookie = req.cookies.get('user').value || '';
-    const token = cookie.split(';')[0].trim();
+    const cookie = req.cookies.get('user')?.value || '';
+    const token = cookie.split(';')[0]?.trim();
     if (!token && (role === 'admin' || role === 'moderator')) {
       return NextResponse.json({ success: false, message: 'Authorization required' }, { status: 401 });
     }
@@ -33,14 +33,13 @@ export async function POST(req) {
 
 
       let cpcId
+      if(role === 'admin' ){
+        cpcId = Math.floor(100000 + Math.random() * 900000).toString();
+      }
       if ((!currentUser || currentUser.role !== 'admin') && (role === 'admin' || role === 'moderator')) {
         return NextResponse.json({ success: false, message: 'Only admins can create admins or moderators' }, { status: 403 });
       }else{
         
-        cpcId = Math.floor(100000 + Math.random() * 900000).toString();
-        if(!name || !roll || !batch || !department || !role){
-          return NextResponse.json({ success: false, message: 'All fields are required' }, { status: 400 });
-        }
       }
       
       

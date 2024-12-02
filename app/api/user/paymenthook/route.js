@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import User from '@/models/user';
 import dbConnect from '@/connect/dbConnect';
+import Event from '@/models/event';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
     apiVersion: '2022-11-15',
@@ -32,7 +33,6 @@ export async function POST(request) {
             const details = JSON.parse(metadata.Details);
   
           console.log('Payment succeeded:', transactionId);
-          console.log('Metadata:', metadata);
   
           if (details.type === 'member') {
             await dbConnect();
@@ -47,6 +47,10 @@ export async function POST(request) {
               role: 'user'
               },
             );
+          }else if (details.type === 'event') {
+            await dbConnect();
+            console.log(details);
+            const event = await Event.findOne({ _id: details.eventId });
           }
           }
             break;
