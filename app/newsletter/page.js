@@ -42,7 +42,7 @@ const NewsletterPage = () => {
       <div className='max-w-6xl mx-auto p-6 relative'>
       <div className="flex pt-16 justify-center">
         {/* Left Side: Category Selector */}
-        <div className="w-1/4 p-4 bg-gray-100">
+        <div className="w-1/4 p-4 bg-gray-100 h-max">
           <h3 className="text-lg font-semibold mb-4">Categories</h3>
           <ul>
             {categories.map((category) => (
@@ -60,13 +60,26 @@ const NewsletterPage = () => {
         {/* Right Side: Newsletters Display */}
         <div className="w-3/4 p-4">
           <h3 className="text-xl font-semibold mb-4">Newsletters</h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-6">
             {filteredNewsletters.map((newsletter) => (
-              <div key={newsletter._id} className="border p-4 rounded-lg shadow-md">
-                <h4 className="text-lg font-semibold">{newsletter.title}</h4>
+              <div key={newsletter._id} className="border w-full p-8 rounded-lg shadow-md">
+                <h4 className="text-2xl font-semibold">{newsletter.title}</h4>
+                <div className='flex justify-between items-center py-6'>
+                    <div className='flex justify-center items-center gap-1'>
+                    <img
+                  src={newsletter?.createdBy?.profile?.avatarUrl === 'https://default-avatar-url.com' 
+                    ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
+                    : newsletter?.createdBy?.profile?.avatarUrl}
+                  alt={newsletter?.createdBy?.profile?.name}
+                  className="w-8 h-8 rounded-full mr-4"
+                />
                 <p className="text-sm text-gray-600">{newsletter.createdBy.profile.name}</p>
-                <p>{newsletter.body}</p>
+                    </div>
                 <div className="mt-2 text-sm text-gray-500">Published on {new Date(newsletter.publishedAt).toLocaleDateString()}</div>
+                {console.log(newsletter)}
+                </div>
+                <img src={newsletter?.image} alt={newsletter.title} className="w-full mb-4" />
+                <p className='p-4' style={{whiteSpace: 'pre-wrap'}}>{newsletter.content}</p>
               </div>
             ))}
           </div>

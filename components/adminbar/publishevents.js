@@ -6,39 +6,39 @@ import { MyContext } from '@/context/context';
 
 
 export default function CreateEventPage() {
-//   const [formData, setFormData] = useState({
-//     title: '',
-//     description: '',
-//     start: '',
-//     end: '',
-//     teamMembers: '',
-//     regFee: '',
-//     lastdate: '',
-//   });
-const [formData, setFormData] = useState({
-    title: 'Sample Event Title',
-    description: `This is a sample event description that goes into more detail. 
-    This event will focus on team-building activities, workshops, and lectures designed to enhance communication, 
-    problem-solving skills, and leadership within teams. 
-    We will have multiple sessions on topics such as effective team collaboration, 
-    time management, conflict resolution, and strategic planning. 
-    The event will include interactive activities like role-playing exercises, 
-    group discussions, and challenges that require creative thinking and collaboration.
-  
-    Special guest speakers from various industries will also join to share their experiences and insights. 
-    The event is designed for individuals looking to enhance their teamwork abilities, 
-    improve their leadership skills, and network with like-minded professionals. 
-    A networking lunch will be provided where attendees can interact with each other and the speakers. 
-  
-    Date: 10th December 2024. The event will start at 10:00 AM and conclude by 12:00 PM. 
-    Please ensure to register by the end of this week to secure your spot. 
-    We have a limited number of spots available and registration fees are ₹100 per participant.`,
-    start: '2024-12-10T10:00',  // ISO 8601 format date-time
-    end: '2024-12-10T12:00',    // ISO 8601 format date-time
-    teamMembers: '5',            // Example team size
-    regFee: '100',
-    lastdate: '2024-12-10T12:00',               // Example registration fee
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    start: '',
+    end: '',
+    teamMembers: '',
+    regFee: '',
+    lastdate: '',
   });
+// const [formData, setFormData] = useState({
+//     title: 'Sample Event Title',
+//     description: `This is a sample event description that goes into more detail. 
+//     This event will focus on team-building activities, workshops, and lectures designed to enhance communication, 
+//     problem-solving skills, and leadership within teams. 
+//     We will have multiple sessions on topics such as effective team collaboration, 
+//     time management, conflict resolution, and strategic planning. 
+//     The event will include interactive activities like role-playing exercises, 
+//     group discussions, and challenges that require creative thinking and collaboration.
+  
+//     Special guest speakers from various industries will also join to share their experiences and insights. 
+//     The event is designed for individuals looking to enhance their teamwork abilities, 
+//     improve their leadership skills, and network with like-minded professionals. 
+//     A networking lunch will be provided where attendees can interact with each other and the speakers. 
+  
+//     Date: 10th December 2024. The event will start at 10:00 AM and conclude by 12:00 PM. 
+//     Please ensure to register by the end of this week to secure your spot. 
+//     We have a limited number of spots available and registration fees are ₹100 per participant.`,
+//     start: '2024-12-10T10:00',  // ISO 8601 format date-time
+//     end: '2024-12-10T12:00',    // ISO 8601 format date-time
+//     teamMembers: '5',            // Example team size
+//     regFee: '100',
+//     lastdate: '2024-12-10T12:00',               // Example registration fee
+//   });
   
   
   const [image, setImage] = useState(null); // For the image file

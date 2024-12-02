@@ -100,6 +100,27 @@ export const POST = async (req) => {
     // Construct the file URL (relative to the public folder)
     // const imageUrl = `/${filename}`;
 
+        
+    function validateDates(start, end, lastdate) {
+      const today = new Date();
+      const startDate = new Date(start);
+      const endDate = new Date(end);
+      const lastDate = new Date(lastdate);
+
+      if (endDate < today) return false;
+      if (startDate >= endDate) return false;
+      if (lastDate <= startDate) return false;
+
+      return true;
+    }
+
+    if (!validateDates(start, end, lastdate)) {
+      return NextResponse.json(
+        { success: false, message: 'Invalid date range' },
+        { status: 400 }
+      );
+    }
+
     // Create and save the new event in the database
     const newEvent = new Event({
       title,

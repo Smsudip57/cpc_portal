@@ -44,7 +44,10 @@ export async function POST(request) {
                 status: 'paid',
                 transactionId: transactionId
               },
-              role: 'user'
+              role: 'user',
+              profile: {
+                cpc_id: Math.floor(100000 + Math.random() * 900000).toString()
+              }
               },
             );
           }else if (details.type === 'event') {

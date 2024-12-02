@@ -99,7 +99,7 @@ export default function Navbar() {
             color='white'
             style={{color:'white'}}
           >
-            {context?.user?.avatarUrl ? <img className='w-[25px] rounded-full' src={context?.user?.avatarUrl} width={100} /> : <AccountCircleIcon fontSize='medium' color='white' style={{color:'white'}}/>}
+            {context?.user?.avatarUrl ? <img className='w-[25px] h-[25px] rounded-full' src={context?.user?.avatarUrl} width={100} /> : <AccountCircleIcon fontSize='medium' color='white' style={{color:'white'}}/>}
             { context?.user?.name }
           </Button>
           <Menu
