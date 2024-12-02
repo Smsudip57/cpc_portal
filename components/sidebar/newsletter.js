@@ -16,8 +16,8 @@ const NewsletterList = () => {
         const res = await axios.get('/api/newsletter/getnewsletter', {  
           withCredentials: true,
          });
-        setNewsletters(res.data.newsletters); // Set newsletters data in state
-        console.log(res.data.newsletters);
+        setNewsletters(res.data?.newsletters); // Set newsletters data in state
+        console.log(res.data?.newsletters);
       } catch (error) {
         setError('Error fetching newsletters');
         console.error('Error fetching newsletters:', error);
@@ -35,39 +35,39 @@ const NewsletterList = () => {
       <h1 className="text-3xl font-bold text-center mb-8">Latest Newsletters</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div className="space-y-6">
-        {newsletters.map((newsletter) => (
-          <div key={newsletter._id} className="bg-white p-6 shadow-md rounded-lg">
+        {newsletters?.map((newsletter) => (
+          <div key={newsletter?._id} className="bg-white p-6 shadow-md rounded-lg">
             {/* Profile section */}
             <div className="flex justify-between items-center mb-4">
               {newsletter?.createdBy?.profile && <div className="flex items-center">
                 <img
                   src={newsletter?.createdBy?.profile?.avatarUrl === 'https://default-avatar-url.com' 
                     ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
-                    : newsletter.createdBy.profile.avatarUrl}
-                  alt={newsletter.createdBy.profile.name}
+                    : newsletter?.createdBy?.profile?.avatarUrl}
+                  alt={newsletter?.createdBy?.profile?.name}
                   className="w-10 h-10 rounded-full mr-4"
                 />
-                <h2 className="text-lg font-semibold">{newsletter.createdBy.profile.name}</h2>
+                <h2 className="text-lg font-semibold">{newsletter?.createdBy?.profile?.name}</h2>
               </div>}
-              <p className="text-sm text-gray-500">{new Date(newsletter.publishedAt).toLocaleDateString()}</p>
+              <p className="text-sm text-gray-500">{new Date(newsletter?.publishedAt).toLocaleDateString()}</p>
             </div>
             
             {/* Newsletter Title and Category */}
-            <h2 className="text-2xl font-bold mb-4">{newsletter.title}</h2>
-            <p className="text-sm text-gray-700 mb-4">Category: {newsletter.category}</p>
-
+            <h2 className="text-2xl font-bold mb-4">{newsletter?.title}</h2>
+            <p className="text-sm text-gray-700 mb-4">Category: {newsletter?.category}</p>
 
             {/* Image after the content */}
-            {newsletter.image && (
+            {newsletter?.image && (
               <img
-                src={newsletter.image}
+                src={newsletter?.image}
                 alt="Newsletter Image"
                 className="w-full border-[1px] border-[#BDE9C9] h-auto rounded-lg mb-4"
               />
             )}
+
             {/* Content */}
-            <div className="text-base text-gray-800 mb-4">
-              <p>{newsletter.content}</p>
+            <div className="text-base text-gray-800 mb-4" style={{ whiteSpace: 'pre-wrap' }}>
+              {newsletter?.content}
             </div>
           </div>
         ))}
