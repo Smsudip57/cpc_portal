@@ -29,14 +29,16 @@ const CreateNewsForm = () => {
   };
 
   const handleSubmit = async (e) => {
-    console.log(formData);
     e.preventDefault();
 
     const formDataToSend = new FormData();
     formDataToSend.append("title", formData.title);
     formDataToSend.append("description", formData.description);
-    formDataToSend.append("facebook", formData.facebook);
-    formDataToSend.append("diu", formData.diu);
+
+    // Append optional fields only if they have values
+    if (formData.facebook) formDataToSend.append("facebook", formData.facebook);
+    if (formData.diu) formDataToSend.append("diu", formData.diu);
+
     formDataToSend.append("image", formData.image);
 
     try {
@@ -84,7 +86,7 @@ const CreateNewsForm = () => {
           onChange={handleInputChange}
           required
           className="w-full p-2 border border-gray-300 rounded-md"
-          style={{ whiteSpace: "pre-wrap" }} // Preserve spaces and new lines
+          style={{ whiteSpace: "pre-wrap" }}
         />
       </div>
 
@@ -94,6 +96,7 @@ const CreateNewsForm = () => {
           type="url"
           name="facebook"
           value={formData.facebook}
+          placeholder="Optional"
           onChange={handleInputChange}
           className="w-full p-2 border border-gray-300 rounded-md"
         />
@@ -105,6 +108,7 @@ const CreateNewsForm = () => {
           type="url"
           name="diu"
           value={formData.diu}
+          placeholder="Optional"
           onChange={handleInputChange}
           className="w-full p-2 border border-gray-300 rounded-md"
         />
@@ -130,7 +134,6 @@ const CreateNewsForm = () => {
         </button>
       </div>
 
-      {/* Display the Description with whitespace preserved */}
       {formData.description && (
         <div className="mt-6 p-4 border border-gray-300 rounded-md bg-gray-50">
           <h3 className="text-lg font-semibold mb-2">Preview:</h3>
