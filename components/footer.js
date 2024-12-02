@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 export default function Footer() {
   return (
@@ -7,10 +8,10 @@ export default function Footer() {
     <div className="mx-auto max-w-screen-xl">
         <div className="md:flex md:justify-between">
             <div className="mb-6 md:mb-0">
-                <a href="/" className="flex items-center">
+                <Link href="/" className="flex items-center">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s" className="mr-3 h-8 rounded-full" alt="cpc Logo" />
                     <span className="self-center text-2xl font-semibold whitespace-nowrap text-stone-700">DIU-CPC</span>
-                </a>
+                </Link>
             </div>
             <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                 <div>
