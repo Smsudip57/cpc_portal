@@ -12,7 +12,7 @@ export default function committeeHeads() {
             <p className='text-xl text-green-700  font-sans font-[600] text-right pr-[15%]'>Club Advisor</p>
             </div>
             <p className='text-left font-sarif text-md text-stone-700 w-4/5 max-w-[1200px]'>
-            When I'm not coding, I enjoy exploring emerging technologies and contributing to open-source projects, fostering innovation and community growth. 
+            When I&apos;m not coding, I enjoy exploring emerging technologies and contributing to open-source projects, fostering innovation and community growth. 
             </p>
             </div>
         </div>
