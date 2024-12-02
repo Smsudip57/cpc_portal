@@ -29,18 +29,13 @@ const NewsletterList = () => {
 
 if (!newsletters) {
     return <Loader />;
-  }else if(newsletters.length === 0){
-    return (
-      <div className="max-w-4xl mx-auto p-6 relative">
-        <p className="text-red-500 text-center">No newsletters found.</p>
-      </div>
-    );
   }
 
   return (
     <div className="max-w-4xl mx-auto p-6 relative">
       <h1 className="text-3xl font-bold text-center mb-8">Latest Newsletters</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
+      {newsletters?.length === 0 && <p className="text-center">No newsletters found.</p>}
       <div className="space-y-6">
         {newsletters?.map((newsletter) => (
           <div key={newsletter?._id} className="bg-white p-6 shadow-md rounded-lg">
