@@ -8,7 +8,7 @@ export default function Goal() {
 
           <div className='basis-1/3 p-2 relative text-stone-600 font-sans'>
           <img src='/goal1.jpg' className='absolute border-2 border-green-500 top-0 left-0 w-[80px] rounded-full aspect-square'/>
-          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Foster Programming Excellence</p>
+          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Programming Excellence</p>
            <div className='border-2 border-red-400 p-6 pt-8 pb-0 text-sm mt-[10%] ml-[30px] rounded-t-2xl rounded-bl-2xl pl-10 h-full'>
            <li className='mb-2'>Skill Building: Enhance problem-solving and programming skills.</li>
           <li className='mb-2'>Prepare for Competitions: Equip members for contests like ICPC, Codeforces, and Google Coding Competitions.</li>
@@ -20,7 +20,7 @@ export default function Goal() {
           </div>
           <div className='basis-1/3 p-2 relative text-stone-600 font-sans min-h-full'>
           <img src='/goal2.jpg' className='absolute border-2 border-green-500 top-0 left-0 w-[80px] rounded-full aspect-square'/>
-          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Build a Collaborative Community</p>
+          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Collaborative Community</p>
            <div className='border-2 border-red-400 p-6 pt-8 pb-0 text-sm mt-[10%] ml-[30px] rounded-t-2xl rounded-bl-2xl pl-10 h-full '>
            <li className='mb-2'>Networking: Connect like-minded students passionate about coding.</li>
           <li className='mb-2'>Teamwork: Foster collaboration through group projects and contests.</li>
@@ -33,7 +33,7 @@ export default function Goal() {
           </div>
           <div className='basis-1/3 p-2 relative text-stone-600 font-sans'>
           <img src='/goal3.jpg' className='absolute border-2 border-green-500 top-0 left-0 w-[80px] rounded-full aspect-square'/>
-          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Enhance Career Readiness</p>
+          <p className='text-lg text-green-700 absolute top-0 right-0 font-sans font-[600] text-right pr-4'>Career Development</p>
            <div className='border-2 border-red-400 p-6 pt-8 pb-0 text-sm mt-[10%] ml-[30px] rounded-t-2xl rounded-bl-2xl pl-10 h-full'>
            <li className='mb-2'>Resume Building: Provide experience with real-world projects and achievements.</li>
           <li className='mb-2'>Technical Interviews: Organize mock interviews and coding prep sessions.</li>

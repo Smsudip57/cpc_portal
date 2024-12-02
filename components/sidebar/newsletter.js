@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Link from 'next/link';
 import Loader from '../loader';
+import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const NewsletterList = () => {
   const [newsletters, setNewsletters] = useState([]);
@@ -75,8 +76,8 @@ const NewsletterList = () => {
 
       {/* Create button */}
       <Link href="/portal/create-newsletter">
-        <button className="fixed bottom-8 right-8 bg-blue-500 text-white p-4 rounded-full shadow-lg hover:bg-blue-600 transition">
-          Create
+        <button className="fixed flex flex-col items-center bottom-8 right-8 bg-[#01AA4D] text-white p-3 rounded-xl shadow-lg hover:bg-blue-600 transition">
+          <EditNoteIcon fontSize='medium'/>Create
         </button>
       </Link>
     </div>

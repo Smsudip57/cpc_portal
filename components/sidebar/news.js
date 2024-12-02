@@ -3,6 +3,9 @@ import axios from 'axios';
 import { MyContext } from '@/context/context';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Loader from '../loader';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const NewsList = () => {
   const [news, setNews] = useState([]);
@@ -90,7 +93,7 @@ const NewsList = () => {
   return (
     <div className="news-list">
       {news.map((newsItem) => (
-        <div key={newsItem._id} className="news-item flex mb-8 border-b pb-8">
+        <div key={newsItem._id} className="news-item flex m-8 rounded-lg border-b p-8 bg-[#bde9c979]">
           <div className="news-image w-1/3 relative">
             <img src={newsItem.image} alt={newsItem.title} className="w-full h-auto object-cover rounded-lg aspect-square" />
             {content.user && content.user.role === 'admin' && (
@@ -126,15 +129,15 @@ const NewsList = () => {
                       </button>
                     )}
                   </div>
-            <div className="social-links">
+            <div className="social-links pt-4 flex items-center">
               {newsItem.facebook && (
                 <a
                   href={newsItem.facebook}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline mr-4"
+                  className="text-blue-700 hover:underline mr-4"
                 >
-                  Facebook Link
+                  <FacebookIcon/>
                 </a>
               )}
               {newsItem.diu && (
@@ -144,7 +147,7 @@ const NewsList = () => {
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"
                 >
-                  DIU Link
+                  <img src='/logo.png' className='w-[45px] mt-[3px]'/>
                 </a>
               )}
             </div>
@@ -152,23 +155,21 @@ const NewsList = () => {
             {/* Upvote/Downvote Buttons */}
             {userId && (
               <>
-                <div className="vote-buttons mt-4">
+                <div className="vote-buttons mt-4 flex gap-8 relative">
                   <button
                     onClick={() => handleVote(newsItem._id, true)} // Upvote
-                    className={`upvote-btn ${newsItem.upvotes.includes(userId) ? 'text-blue-500' : ''}`}
+                    className={`upvote-btn gap-2 text-white px-2 py-1 rounded-md items-center flex ${newsItem.upvotes.includes(userId) ? 'bg-blue-500' : 'bg-gray-500'}`}
                   >
-                    Upvote
+                    {newsItem.upvotes.length}
+                    <ThumbUpIcon fontSize='small'/>
                   </button>
                   <button
                     onClick={() => handleVote(newsItem._id, false)} // Downvote
-                    className={`downvote-btn ${newsItem.downvotes.includes(userId) ? 'text-red-500' : ''}`}
+                    className={`downvote-btn gap-2 text-white px-2 py-1 rounded-md items-center flex  ${newsItem.downvotes.includes(userId) ? 'bg-red-500' : 'bg-gray-500'}`}
                   >
-                    Downvote
+                    {newsItem.downvotes.length}
+                    <ThumbDownIcon fontSize='small'/>
                   </button>
-                </div>
-                <div className="vote-counts mt-2">
-                  <span>{newsItem.upvotes.length} Upvotes</span>
-                  <span className="ml-4">{newsItem.downvotes.length} Downvotes</span>
                 </div>
               </>
             )}

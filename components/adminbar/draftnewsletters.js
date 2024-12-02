@@ -46,16 +46,17 @@ const DraftNewsletterList = () => {
   if (error) return <p className="text-center text-red-500">{error}</p>;
 
   return (
+    <div className='w-full rounded-lg py-6 min-h-[80vh]'>
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">Draft Newsletters</h1>
-      <div className="space-y-6">
+      <h1 className="text-xl font-mono w-full font-semibold pb-8 text-center">Draft Newsletters</h1>
+      <div className="space-y-6 w-full">
         {drafts?.map((draft) => (
-          <div key={draft._id} className="bg-white shadow-md rounded-lg overflow-hidden">
+          <div key={draft._id} className="shadow-xl border-2 rounded-lg overflow-hidden h-full">
             {draft?.image && (
               <img
                 src={draft?.image}
                 alt="Draft Image"
-                className="w-full h-64 object-cover"
+                className="w-full p-12"
               />
             )}
             <div className="p-6">
@@ -96,6 +97,7 @@ const DraftNewsletterList = () => {
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

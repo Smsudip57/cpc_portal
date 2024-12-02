@@ -65,7 +65,9 @@ const CreateNewsForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-4">
+    <div className="w-full bg-[#BDE9C9] rounded-lg py-6">
+      <p class="text-xl font-mono w-full font-semibold py-4 text-center">Create News</p>
+      <form onSubmit={handleSubmit} className="max-w-xl mx-auto p-8 bg-[#4ADE80] rounded-md">
       <div className="mb-4">
         <label className="block text-lg font-semibold">Title</label>
         <input
@@ -141,6 +143,7 @@ const CreateNewsForm = () => {
         </div>
       )}
     </form>
+    </div>
   );
 };
 

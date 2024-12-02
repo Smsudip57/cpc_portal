@@ -61,13 +61,13 @@ const UserSearch = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-8">User Search</h1>
+      <h1 className="text-xl font-mono w-full font-semibold pb-8 text-center">User Search</h1>
       {error && <p className="text-red-500 text-center">{error}</p>}
       
       <div className="mb-6">
         <input
           type="text"
-          className="w-full p-3 border rounded-lg"
+          className="w-full p-3 border border-[#01AA4D] rounded-lg"
           placeholder="Search by name, batch, department, roll, CPC ID"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
@@ -76,7 +76,7 @@ const UserSearch = () => {
 
       <div className="space-y-6">
         {filteredUsers.map((user) => (
-          <div key={user._id} className="bg-white p-6 shadow-md rounded-lg flex justify-between items-center">
+          <div key={user._id} className="bg-[#BDE9C9] p-6 shadow-lg rounded-lg flex justify-between items-center">
             <div>
               <h2 className="text-xl font-semibold">{user.profile.name}</h2>
               <p className="text-sm text-gray-500">Batch: {user.profile.batch}</p>

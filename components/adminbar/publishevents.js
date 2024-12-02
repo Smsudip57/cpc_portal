@@ -101,8 +101,9 @@ const [formData, setFormData] = useState({
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 bg-gray-100 rounded-md shadow-md">
-      <h1 className="text-xl font-bold mb-6">Create Event</h1>
+    <div className='w-full bg-[#BDE9C9] rounded-lg py-6'>
+        <p class="text-xl font-mono w-full font-semibold pt-2 text-center">Create Event</p>
+    <div className="max-w-2xl mx-auto mt-10 p-6 rounded-md bg-[#4ADE80]">
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium mb-1">Title</label>
@@ -205,6 +206,7 @@ const [formData, setFormData] = useState({
       </form>
 
       {message && <p className="mt-4 text-center">{message}</p>}
+    </div>
     </div>
   );
 }

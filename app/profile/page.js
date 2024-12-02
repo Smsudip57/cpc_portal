@@ -66,18 +66,31 @@ const Profile = () => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    const formDataToSend = new FormData();
+    formDataToSend.append('name', formData.name);
+    formDataToSend.append('bio', formData.bio);
+    formDataToSend.append('contact', formData.contact);
+    
+    // Add the file object directly instead of base64 string
+    const fileInput = document.getElementById('avatar-upload');
+    if (fileInput?.files[0]) {
+      formDataToSend.append('avatar', fileInput.files[0]);
+    }
+  
     try {
-      setLoading(true);
-      const response = await axios.put('/api/user/updateprofile', formData, { withCredentials: true });
-      context.customToast(response.data);
-      setUser(response.data.updatedUser);
-      setIsEditing(false); // Exit editing mode after saving
+      const response = await axios.put('/api/user/updateprofile', formDataToSend, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true,
+      });
+      context.customToast(response.data.message);
+      // Refresh user data or UI as needed
     } catch (err) {
-      context.customToast(err.response.data);
-    } finally {
-      setLoading(false);
+      console.error('Error updating profile:', err);
+      context.customToast(err.response?.data?.message || 'Something went wrong!');
     }
   };
+  
+  
 
   const handleCancelEdit = () => {
     setIsEditing(false);
@@ -101,7 +114,7 @@ const Profile = () => {
           <img 
             src={(imagePreview === 'https://default-avatar-url.com' || imagePreview === '')
               ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
-              : newsletter.createdBy.profile.avatarUrl}
+              : imagePreview}
             alt="Avatar" 
             className="w-28 h-28 rounded-full object-cover"
           />

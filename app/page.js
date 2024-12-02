@@ -18,7 +18,7 @@ import 'swiper/css/thumbs';
 // import './styles.css'; 
 // import required modules
 import { EffectFade, Autoplay,FreeMode, Navigation,Thumbs, Pagination } from 'swiper/modules';
-import { set } from "mongoose";
+import Footer from "@/components/footer";
 
 
 
@@ -107,6 +107,7 @@ export default function Home() {
       <Goal />
       <CommitteeHeads />
       </div>
+      <Footer />
     </div>
     
   );
