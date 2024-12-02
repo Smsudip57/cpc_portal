@@ -83,7 +83,7 @@ export default function Sidebar() {
         style={{ fontWeight: '600', backgroundColor: pathname === '/admin/customuser' && '#80BE92' }}
         onClick={() => router.replace('/admin/customuser')}
       >
-          create Customuser
+          create Custom User
         </Button>
 
 

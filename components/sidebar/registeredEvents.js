@@ -225,7 +225,8 @@ useEffect(() => {
                     layout="responsive"
                     className="object-cover basis-1/2 aspect-[16/9] mb-8 rounded-md w-full h-full"
                   />
-                  <div className="">
+                  <div className="basis-1/2">
+                    
                   <h2 className="text-2xl font-bold text-gray-800">{event?.title}</h2>
                   <div className="relative">
                     <p

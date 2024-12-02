@@ -2,7 +2,9 @@ import React from 'react'
 
 export default function committeeHeads() {
   return (
-    <div className='w-full pt-40'>
+    <div className='w-full py-40'>
+      <p className='w-full text-3xl text-center py-10 pb-16 font-bold text-stone-700'>Commi<span className='text-[#FF3115]'>tt</span>ee
+      </p>
         <div className='w-4/5 mx-auto flex justify-between'>
         <div title='Club Advisor' className='basis-[30%] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>

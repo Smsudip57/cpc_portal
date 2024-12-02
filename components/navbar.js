@@ -24,6 +24,9 @@ export default function Navbar() {
   };
   const context = useContext(MyContext);
   const [seton,setSeton] = useState();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleDropdown = () => setIsOpen(!isOpen);
 
   
 
@@ -96,7 +99,7 @@ export default function Navbar() {
             color='white'
             style={{color:'white'}}
           >
-            <AccountCircleIcon fontSize='medium' color='white' style={{color:'white'}}/>
+            {context?.user?.avatarUrl ? <img className='w-[25px] rounded-full' src={context?.user?.avatarUrl} width={100} /> : <AccountCircleIcon fontSize='medium' color='white' style={{color:'white'}}/>}
             { context?.user?.name }
           </Button>
           <Menu
@@ -207,6 +210,11 @@ export default function Navbar() {
             <Link href='/portal'><MenuItem onClick={handleClose} >Portal</MenuItem></Link>
             {/* <MenuItem onClick={handleClose}></MenuItem> */}
           </Menu>
+            </>
+          }
+          {
+            <>
+             
             </>
           }
         </div>

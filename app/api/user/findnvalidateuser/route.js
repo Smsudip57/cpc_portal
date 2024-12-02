@@ -49,6 +49,7 @@ export async function GET(req) {
         name: user.profile.name,
         role: user.role,
         email: user.email,
+        avatarUrl: user.profile.avatarUrl
       }
     });
   } catch (error) {

@@ -7,7 +7,7 @@ import Loader from '../loader';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 
 const NewsletterList = () => {
-  const [newsletters, setNewsletters] = useState([]);
+  const [newsletters, setNewsletters] = useState();
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -27,8 +27,15 @@ const NewsletterList = () => {
     fetchNewsletters();
   }, []);
 
-  if (newsletters.length === 0) {
+if (!newsletters) {
     return <Loader />;
+  }else if(newsletters.length === 0){
+    content.customToast({ success: true, message: 'No newsletters found' });
+    return (
+      <div className="max-w-4xl mx-auto p-6 relative">
+        <p className="text-red-500 text-center">No newsletters found.</p>
+      </div>
+    );
   }
 
   return (

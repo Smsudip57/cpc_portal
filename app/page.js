@@ -19,6 +19,7 @@ import 'swiper/css/thumbs';
 // import required modules
 import { EffectFade, Autoplay,FreeMode, Navigation,Thumbs, Pagination } from 'swiper/modules';
 import Footer from "@/components/footer";
+import Homenav from "@/components/homenav";
 
 
 
@@ -34,7 +35,7 @@ export default function Home() {
     },10000)
   })
   return (
-    <div className="h-[300vh] relative"   title="cpcportal_home">
+    <div className=" relative"   title="cpcportal_home">
       <Navbar />
       <Homeview />
       <div className='w-full aspect-[2.9/1] flex justify-center items-center'>
@@ -106,6 +107,7 @@ export default function Home() {
       <div className="bg-white w-full h-full pt-6">
       <Goal />
       <CommitteeHeads />
+      <Homenav />
       </div>
       <Footer />
     </div>

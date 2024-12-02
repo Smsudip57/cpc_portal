@@ -11,7 +11,6 @@ export async function PUT(req) {
     const bio = body.get('bio');
     const contact = body.get('contact');
     const avatarFile = body.get('avatar'); // Optional file input
-    console.log(Number(contact));
     // Validate input
     // console.log(name, bio, contact, avatarFile);
     if (contact && isNaN(contact)) {

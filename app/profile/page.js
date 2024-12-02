@@ -27,6 +27,14 @@ const Profile = () => {
         const response = await axios.get('/api/user/profile', { withCredentials: true });
         const userData = response.data.user;
         setUser(userData);
+        setUser((prevUser) => ({
+          ...prevUser,
+          profile: {
+            ...prevUser.profile,
+            contact: '0' + userData.profile.contact, // Prepend '0' to the contact number
+          },
+        }));
+        
 
         // Initialize form with updatable fields only
         setFormData({
@@ -83,10 +91,21 @@ const Profile = () => {
         withCredentials: true,
       });
       context.customToast(response.data.message);
+
+      setIsEditing(false);
+      setUser({
+        ...response.data.user,
+        profile: {
+          ...response.data.user.profile,
+          contact: '0' + response.data.user.profile.contact,
+        },
+      });
+      
       // Refresh user data or UI as needed
     } catch (err) {
       console.error('Error updating profile:', err);
       context.customToast(err.response?.data?.message || 'Something went wrong!');
+      setIsEditing(false)
     }
   };
   
