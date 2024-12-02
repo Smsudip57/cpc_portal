@@ -109,6 +109,7 @@ export default function Navbar() {
             }}
             style={{zIndex:91}}
           >
+            <Link href='/profile'><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
             <Link href='/admin'><MenuItem onClick={handleClose}>Admin</MenuItem></Link>
             <Link href='/portal'><MenuItem onClick={handleClose}>Portal</MenuItem></Link>
           </Menu>
@@ -140,6 +141,7 @@ export default function Navbar() {
             }}
             style={{zIndex:91}}
           >
+            <Link href='/profile'><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
             <Link href='/admin'><MenuItem onClick={handleClose}>Admin</MenuItem></Link>
             <Link href='/portal'><MenuItem onClick={handleClose}>Portal</MenuItem></Link>
           </Menu>

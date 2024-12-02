@@ -31,13 +31,13 @@ export async function POST(req) {
     }
 
     // Find the event by eventId
+    const {eventId,...members} = body;
     const event = await Event.findById(eventId);
     if (!event) {
       return NextResponse.json({ message: 'Event not found' }, { status: 404 });
     }
 
     const { regFee } = event;
-    const {eventId,...members} = body;
 
     const participantIds = [];
 
@@ -48,13 +48,13 @@ export async function POST(req) {
       // Find user in the database by roll number (or any unique field, if needed)
       const participant = await User.findOne({
         'profile.roll': member.roll, 
-        'profile.batch': member.batch, 
-        'profile.department': member.department, 
-        'profile.name': member.name,
+        'profile.batch': { $regex: new RegExp(`^${member.batch}$`, 'i') },
+        'profile.department': { $regex: new RegExp(`^${member.department}$`, 'i') },
+        'profile.name': { $regex: new RegExp(`^${member.name}$`, 'i') },
       });
       
       if (!participant) {
-        return NextResponse.json({ success: false, message: `Member not found` }, { status: 404 });
+        return NextResponse.json({ success: false, message: `Member ${member.name} not found` }, { status: 404 });
       }
 
       participantIds.push(participant._id);

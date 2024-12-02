@@ -39,9 +39,9 @@ const NewsletterList = () => {
           <div key={newsletter._id} className="bg-white p-6 shadow-md rounded-lg">
             {/* Profile section */}
             <div className="flex justify-between items-center mb-4">
-              {newsletter.createdBy.profile && <div className="flex items-center">
+              {newsletter?.createdBy?.profile && <div className="flex items-center">
                 <img
-                  src={newsletter.createdBy.profile.avatarUrl === 'https://default-avatar-url.com' 
+                  src={newsletter?.createdBy?.profile?.avatarUrl === 'https://default-avatar-url.com' 
                     ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
                     : newsletter.createdBy.profile.avatarUrl}
                   alt={newsletter.createdBy.profile.name}
