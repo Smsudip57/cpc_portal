@@ -54,7 +54,7 @@ export default function Home() {
         className="mySwiper2 h-full w-full"
       >
         
-            {
+            {/* {
               firstview &&
               <SwiperSlide
               className="w-full h-full "
@@ -66,7 +66,7 @@ export default function Home() {
             </p>
               </div>
             </SwiperSlide>
-            }
+            } */}
        {
           Array.from({ length: 7 }).map((_, index) => (
             <SwiperSlide
@@ -103,9 +103,9 @@ export default function Home() {
           ))
         }
       </Swiper>
-      <div className="bg-white w-full h-full">
-      <CommitteeHeads />
+      <div className="bg-white w-full h-full pt-6">
       <Goal />
+      <CommitteeHeads />
       </div>
     </div>
     
