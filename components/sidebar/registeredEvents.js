@@ -56,6 +56,7 @@ useEffect(() => {
         if (res.data.success) {
           setEvents(res.data.events); 
         }
+        setLoading(false); 
       } catch (error) {
         console.error("Error fetching events:", error); 
         setLoading(false); 
