@@ -3,14 +3,15 @@ import dbConnect from '@/connect/dbConnect';  // Your database connection utilit
 import Newsletter from '@/models/newsletter'; // The Newsletter model
 import User from '@/models/user'; // The User model
 import jwt from 'jsonwebtoken';
+import * as cookie from 'cookie';
 
 export async function GET(req) {
   try {
     // Connect to the database
     await dbConnect();
     let userId;
-    const cookie = req.cookies.get('user').value;
-      const token = cookie.split(';')[0].trim();
+    const cookies = cookie.parse(req.headers.get('cookie') || '');
+    const token = cookies.user ? cookies.user.split(';')[0] : null;
       if (token) {
         let decoded;
       try {
