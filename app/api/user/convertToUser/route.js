@@ -57,14 +57,20 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-
+    console.log(user)
     // Update user details
     user.profile.name = name;
     user.profile.batch = batch;
     user.profile.roll = roll;
     user.profile.department = department;
     await user.save();
-    
+    console.log(user)
+    await User.findOneAndUpdate({ _id: user._id },{ profile:{ 
+      name:name,
+    batch: batch,
+    roll:roll,
+  department:department
+     }});
 
     // Create a Stripe Payment Session (example)
     const paymentSession = await stripe.checkout.sessions.create({
