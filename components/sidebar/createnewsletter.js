@@ -9,7 +9,7 @@ const CreateNewsletter = () => {
     title: '',
     content: '',
     category: '',
-    image: null, // Optional image file
+    image: null, 
   });
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -105,7 +105,7 @@ const CreateNewsletter = () => {
             required
             rows="4"
             className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            style={{ whiteSpace: 'pre-wrap' }} // Preserve newlines
+            style={{ whiteSpace: 'pre-wrap' }} 
           />
         </div>
 

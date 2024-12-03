@@ -92,7 +92,7 @@ export default function Sidebar() {
       </Button>
 
 
-        {/* logout */}
+        
         <div className='text-white absolute bottom-0 mb-16 bg-[#027223] text-md   rounded-sm'>
 
         <Button variant="text" color='White'  className='px-4' onClick={logout} style={{paddingLeft:'16px',paddingRight:'16px'}}>Logout</Button>

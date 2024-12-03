@@ -30,7 +30,7 @@ export default function Sidebar() {
 
   return (
     <div className='w-[350px] fixed z-[50] bg-[#BDE9C9] min-h-[100vh] pt-24 flex flex-col py-[10%] items-center text-[#027223] gap-3'>
-        {/* buttons */}
+        
         <Button
         variant="text"
         color="inherit"
@@ -88,7 +88,7 @@ export default function Sidebar() {
 
 
 
-        {/* logout */}
+        
         <div className='text-white absolute bottom-0 mb-16 bg-[#027223] text-md   rounded-sm'>
 
         <Button variant="text" color='White'  className='px-4' onClick={logout} style={{paddingLeft:'16px',paddingRight:'16px'}}>Logout</Button>

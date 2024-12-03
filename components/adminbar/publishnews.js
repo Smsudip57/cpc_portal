@@ -35,7 +35,7 @@ const CreateNewsForm = () => {
     formDataToSend.append("title", formData.title);
     formDataToSend.append("description", formData.description);
 
-    // Append optional fields only if they have values
+    
     if (formData.facebook) formDataToSend.append("facebook", formData.facebook);
     if (formData.diu) formDataToSend.append("diu", formData.diu);
 

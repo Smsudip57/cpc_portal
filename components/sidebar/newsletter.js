@@ -11,13 +11,13 @@ const NewsletterList = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch newsletters from the API
+    
     const fetchNewsletters = async () => {
       try {
         const res = await axios.get('/api/newsletter/getnewsletter', {  
           withCredentials: true,
          });
-        setNewsletters(res.data?.newsletters); // Set newsletters data in state
+        setNewsletters(res.data?.newsletters); 
         console.log(res.data?.newsletters);
       } catch (error) {
         setError('Error fetching newsletters');
@@ -39,7 +39,7 @@ if (!newsletters) {
       <div className="space-y-6">
         {newsletters?.map((newsletter) => (
           <div key={newsletter?._id} className="bg-white p-6 shadow-md rounded-lg">
-            {/* Profile section */}
+            
             <div className="flex justify-between items-center mb-4">
               {newsletter?.createdBy?.profile && <div className="flex items-center">
                 <img
@@ -54,11 +54,11 @@ if (!newsletters) {
               <p className="text-sm text-gray-500">{new Date(newsletter?.publishedAt).toLocaleDateString()}</p>
             </div>
             
-            {/* Newsletter Title and Category */}
+            
             <h2 className="text-2xl font-bold mb-4">{newsletter?.title}</h2>
             <p className="text-sm text-gray-700 mb-4">Category: {newsletter?.category}</p>
 
-            {/* Image after the content */}
+            
             {newsletter?.image && (
               <img
                 src={newsletter?.image}
@@ -67,7 +67,7 @@ if (!newsletters) {
               />
             )}
 
-            {/* Content */}
+            
             <div className="text-base text-gray-800 mb-4" style={{ whiteSpace: 'pre-wrap' }}>
               {newsletter?.content}
             </div>
@@ -75,7 +75,7 @@ if (!newsletters) {
         ))}
       </div>
 
-      {/* Create button */}
+      
       <Link href="/portal/create-newsletter">
         <button className="fixed flex flex-col items-center bottom-8 right-8 bg-[#01AA4D] text-white p-3 rounded-xl shadow-lg hover:bg-blue-600 transition">
           <EditNoteIcon fontSize='medium'/>Create

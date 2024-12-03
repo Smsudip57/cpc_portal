@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import Image from "next/image";
-import axios from "axios"; // Importing Axios
+import axios from "axios"; 
 import { MyContext } from "@/context/context";
 import { Button } from "@mui/material";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
@@ -9,10 +9,10 @@ import Loader from "../loader";
 import { useRouter } from "next/navigation";
 
 const EventList = () => {
-  const { user } = useContext(MyContext); // Access the user context to check for admin
+  const { user } = useContext(MyContext); 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedEventId, setSelectedEventId] = useState(null); // Track selected event
+  const [selectedEventId, setSelectedEventId] = useState(null); 
   const [formData, setFormData] = useState({});
   const context = useContext(MyContext);
   const router = useRouter();
@@ -22,7 +22,7 @@ const EventList = () => {
     setIsExpanded(!isExpanded);
   };
 
-// Initialize when `selectedEventId` or `events` changes
+
 useEffect(() => {
   const selectedEvent = events.find((event) => event._id === selectedEventId);
   if (selectedEvent) {
@@ -48,35 +48,33 @@ useEffect(() => {
       return true;
     };
   
-  // Fetch events from your API
+  
   useEffect(() => {
     const fetchEvents = async () => {
       try {
         const res = await axios.get("/api/events/registeredevent",{ withCredentials: true });
         if (res.data.success) {
-          setEvents(res.data.events); // Set events to state if successful
+          setEvents(res.data.events); 
         }
       } catch (error) {
-        console.error("Error fetching events:", error); // Log error if any
-      } finally {
-        setLoading(false); // Stop loading when done
+        console.error("Error fetching events:", error); 
+        setLoading(false); 
       }
     };
-    fetchEvents(); // Call fetch events on component mount
+    fetchEvents();
   }, []);
 
-  // Handle event selection
+  
   const handleEventClick = (eventId) => {
     if (selectedEventId === eventId) {
-      setSelectedEventId(null); // Deselect if the same event is clicked again
+      setSelectedEventId(null); 
     } else {
-      setSelectedEventId(eventId); // Select the event
-      // Reset form data when switching events
+      setSelectedEventId(eventId); 
       setFormData({});
     }
   };
 
-  // Handle input changes in the dynamic form
+  
   const handleInputChange = (e, memberKey, field) => {
     const { value } = e.target;
     setFormData((prev) => ({
@@ -89,7 +87,7 @@ useEffect(() => {
   };
   
 
-  // Handle form submission
+  
   const handleFormSubmit = async (e) => {
     e.preventDefault();
   
@@ -109,10 +107,10 @@ useEffect(() => {
       if (response.data.url) {
         router.push(response.data.url);
         
-        // setFormData({});
+       
       }
   
-      // Handle success response
+      
       context.customToast({ success: true, message: "Form submitted successfully!" });
     } catch (error) {
       console.error(error);
@@ -121,22 +119,22 @@ useEffect(() => {
     }
   };
 
-  // Delete event handler
+  
   const handleDelete = async (eventId) => {
     try {
       const res = await axios.delete(
         `/api/events/deleteevent`,
         {
-          data: { eventId: eventId }, // Use the `data` field to send the body
+          data: { eventId: eventId }, 
           withCredentials: true,
         }
       );
       context.customToast(res.data);
       if (res.data.success) {
-        // Remove the event from the state after deletion
+        
         setEvents(events.filter(event => event._id !== eventId));
         if (selectedEventId === eventId) {
-          setSelectedEventId(null); // Deselect if the deleted event was selected
+          setSelectedEventId(null); 
         }
       }
     } catch (error) {
@@ -146,7 +144,7 @@ useEffect(() => {
   };
 
   if (loading) {
-    return  <Loader/>; // Show loading message
+    return  <Loader/>; 
   }
 
   return (
@@ -160,30 +158,30 @@ useEffect(() => {
         Back
       </Button>
       )}
-      {/* List of Events */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 flex-1">
         {!selectedEventId && events.map((event) => (
           <div
             key={event?._id}
             className={`bg-white rounded-lg shadow-lg overflow-hidden transition-transform transform hover:scale-105 relative ${selectedEventId === event?._id ? "hidden" : ""}`}
-            onClick={() => handleEventClick(event?._id)} // Handle event click
+            onClick={() => handleEventClick(event?._id)} 
           >
-            {/* Show delete button only if the user is an admin */}
+            
             {user?.role === "admin" && (
               <button
-                onClick={(e) => { e.stopPropagation(); handleDelete(event?._id); }} // Prevent event click
+                onClick={(e) => { e.stopPropagation(); handleDelete(event?._id); }} 
                 className="absolute z-50 top-2 right-2 bg-red-500 text-white p-1 rounded-md hover:bg-red-600 focus:outline-none"
               >
                 <DeleteIcon />
               </button>
             )}
 
-            <div className="relative aspect-[16/9]"> {/* Ensure the aspect ratio is square */}
+            <div className="relative aspect-[16/9]"> 
               <img
-                src={event?.image || "/default-image.jpg"} // Default image if no image
+                src={event?.image || "/default-image.jpg"} 
                 alt={event?.title}
                 width={500}
-                height={500} // Set both width and height to create a square image
+                height={500} 
                 layout="responsive"
                 className="object-cover aspect-[16/9] w-full h-full"
               />
@@ -191,7 +189,7 @@ useEffect(() => {
             <div className="p-4">
               <h3 className="text-xl font-semibold text-gray-800">{event?.title}</h3>
               <p className="mt-2 text-gray-600 text-sm">
-                {event?.description.slice(0, 100)}... {/* Truncate text if not expanded */}
+                {event?.description.slice(0, 100)}... 
               </p>
               <div className="flex justify-between items-center mt-4 text-sm text-gray-500">
                 <span>{new Date(event?.start).toLocaleDateString()} -{" "}
@@ -207,11 +205,11 @@ useEffect(() => {
         ))}
       </div>
 
-      {/* Event Details and Form for Selected Event */}
+      
       {selectedEventId && (
         <div className="flex flex-col md:flex-row md:gap-10 w-full">
           
-          {/* Left Side: Event Details */}
+         
           <div className="w-full bg-white p-6 rounded-lg shadow-lg">
             {events
               .filter((event) => event._id === selectedEventId)
@@ -238,10 +236,10 @@ useEffect(() => {
                         WebkitBoxOrient: "vertical",
                         overflow: "hidden",
                         WebkitLineClamp: isExpanded ? "none" : 3,
-                        whiteSpace: "pre-wrap", // Ensures text formatting is preserved
+                        whiteSpace: "pre-wrap", 
                       }}
                     >{event.description}</p>
-                    {event.description.length > 100 && ( // Adjust length threshold if needed
+                    {event.description.length > 100 && ( 
                       <button
                         onClick={toggleExpanded}
                         className="text-blue-500 mt-1 text-sm"
@@ -260,7 +258,7 @@ useEffect(() => {
               ))}
           </div>
 
-          {/* Right Side: Dynamic Form for Team Members */}
+          
          
         </div>
       )}

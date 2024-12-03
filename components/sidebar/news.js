@@ -12,7 +12,7 @@ const NewsList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const content = useContext(MyContext);
-  const [userId, setUserId] = useState(); // Set this based on logged-in user
+  const [userId, setUserId] = useState(); 
   const [isExpanded, setIsExpanded] = useState(false);
 
   const toggleExpanded = () => {
@@ -39,24 +39,24 @@ const NewsList = () => {
     fetchNews();
   }, []);
 
-  // Handle Upvote/Downvote
+  
   const handleVote = async (newsId, vote) => {
     try {
-      // Send the vote to the backend
+      
       await axios.post('/api/news/vote', { newsId, vote });
   
-      // Update the state with new vote values
+      
       setNews((prevNews) =>
         prevNews.map((item) =>
           item._id === newsId
             ? {
                 ...item,
                 upvotes: vote
-                  ? [...new Set([...item.upvotes, userId])]  // Ensure no duplicate votes
-                  : item.upvotes.filter((id) => id !== userId), // Remove user's vote
+                  ? [...new Set([...item.upvotes, userId])]  
+                  : item.upvotes.filter((id) => id !== userId), 
                 downvotes: !vote
-                  ? [...new Set([...item.downvotes, userId])]  // Ensure no duplicate votes
-                  : item.downvotes.filter((id) => id !== userId), // Remove user's vote
+                  ? [...new Set([...item.downvotes, userId])]  
+                  : item.downvotes.filter((id) => id !== userId), 
               }
             : item
         )
@@ -67,7 +67,7 @@ const NewsList = () => {
     }
   };
   
-  // Handle Delete
+  
   const handleDelete = async (newsId) => {
     try {
       await axios.delete(`/api/news/deletenews`, {
@@ -117,10 +117,10 @@ const NewsList = () => {
                         WebkitBoxOrient: "vertical",
                         overflow: "hidden",
                         WebkitLineClamp: isExpanded ? "none" : 8,
-                        whiteSpace: "pre-wrap", // Ensures text formatting is preserved
+                        whiteSpace: "pre-wrap", 
                       }}
                     >{newsItem?.description}</p>
-                    {newsItem?.description.length > 100 && ( // Adjust length threshold if needed
+                    {newsItem?.description.length > 100 && ( 
                       <button
                         onClick={toggleExpanded}
                         className="text-blue-500 mt-1 text-sm"
@@ -152,19 +152,19 @@ const NewsList = () => {
               )}
             </div>
 
-            {/* Upvote/Downvote Buttons */}
+            
             {userId && (
               <>
                 <div className="vote-buttons mt-4 flex gap-8 relative">
                   <button
-                    onClick={() => handleVote(newsItem._id, true)} // Upvote
+                    onClick={() => handleVote(newsItem._id, true)} 
                     className={`upvote-btn gap-2 text-white px-2 py-1 rounded-md items-center flex ${newsItem.upvotes.includes(userId) ? 'bg-blue-500' : 'bg-gray-500'}`}
                   >
                     {newsItem.upvotes.length}
                     <ThumbUpIcon fontSize='small'/>
                   </button>
                   <button
-                    onClick={() => handleVote(newsItem._id, false)} // Downvote
+                    onClick={() => handleVote(newsItem._id, false)} 
                     className={`downvote-btn gap-2 text-white px-2 py-1 rounded-md items-center flex  ${newsItem.downvotes.includes(userId) ? 'bg-red-500' : 'bg-gray-500'}`}
                   >
                     {newsItem.downvotes.length}

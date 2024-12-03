@@ -41,7 +41,7 @@ export default function CreateEventPage() {
 //   });
   
   
-  const [image, setImage] = useState(null); // For the image file
+  const [image, setImage] = useState(null); 
   const [message, setMessage] = useState('');
   const context = useContext(MyContext);
 
@@ -59,12 +59,12 @@ export default function CreateEventPage() {
 
     const formDataToSend = new FormData();
 
-    // Append regular form fields
+    
     for (const key in formData) {
       formDataToSend.append(key, formData[key]);
     }
 
-    // Append the image file
+    
     if (image) {
       formDataToSend.append('image', image);
     }
