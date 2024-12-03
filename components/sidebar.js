@@ -21,6 +21,9 @@ export default function Sidebar() {
     try {
       const res  = await axios.get('/api/user/logout', {}, { withCredentials: true });
       context.customToast(res.data);
+      if(res.data.success){
+        context.setUser()
+      }
       router.push('/login');
     } catch (error) {
       context.customToast({success:false, message:'Something went wrong'});
