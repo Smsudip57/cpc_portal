@@ -4,7 +4,6 @@ import dbConnect from '@/connect/dbConnect';
 import User from '@/models/user';
 import jwt from 'jsonwebtoken';
 import Stripe from 'stripe';
-import { Details } from '@mui/icons-material';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: '2020-08-27',
@@ -57,20 +56,12 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-    console.log(user)
     // Update user details
     user.profile.name = name;
     user.profile.batch = batch;
     user.profile.roll = roll;
     user.profile.department = department;
     await user.save();
-    console.log(user)
-    await User.findOneAndUpdate({ _id: user._id },{ profile:{ 
-      name:name,
-    batch: batch,
-    roll:roll,
-  department:department
-     }});
 
     // Create a Stripe Payment Session (example)
     const paymentSession = await stripe.checkout.sessions.create({

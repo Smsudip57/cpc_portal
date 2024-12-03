@@ -45,6 +45,7 @@ export async function POST(request) {
               },
               role: 'user',
               profile: {
+                ...user.profile, 
                 cpc_id: Math.floor(100000 + Math.random() * 900000).toString()
               }
               },
