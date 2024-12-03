@@ -3,6 +3,7 @@ import Event from '@/models/event'; // Your Event model
 import { NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
 import User from '@/models/user';
+import * as cookie from 'cookie';
 
 export async function GET(req) {
   try {
@@ -11,32 +12,25 @@ export async function GET(req) {
 
     const cookie = req.cookies.get('user')?.value;
     if (!cookie) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
     }
 
-    const token = cookie.split(';')[0].trim();
-    if (!token) {
-      return NextResponse.json(
-        { success: false, message: 'Unauthorized' },
-        { status: 401 }
-      );
-    }
+    // // const token = cookie.split(';')[0].trim();
+    // if (!token) {
+     
+    // }
 
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
       console.error('JWT verification error:', error);
-      return NextResponse.json(
-        { success: false, message: 'Invalid token' },
-        { status: 403 }
-      );
+      // return NextResponse.json(
+      //   { success: false, message: 'Invalid token' },
+      //   { status: 403 }
+      // );
     }
 
-    const user = await User.findById(decoded.userId);
+    // const user = await User.findById(decoded.userId);
     // if (!user || user.role !== 'user') {
     //   return NextResponse.json(
     //     { success: false, message: 'Access denied' },
