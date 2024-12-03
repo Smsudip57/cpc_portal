@@ -8,7 +8,7 @@ export default function committeeHeads() {
         <div className='w-4/5 mx-auto flex flex-col lg:flex-row gap-10 lg:gap-0 items-center  justify-between'>
         <div title='Club Advisor' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
-            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
+            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummyjpg.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>
             <p className='text-xl text-stone-700 font-[600] mb-1'>S M Najmul Hossain</p>
             <p className='text-lg text-green-700  font-sans font-[600] text-right pr-[15%]'>Club Advisor</p>
@@ -20,7 +20,7 @@ export default function committeeHeads() {
         </div>
         <div title='President' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
-            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
+            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummyjpg.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>
             <p className='text-xl text-stone-700 font-[600] mb-1'>S M Najmul Hossain</p>
             <p className='text-lg text-green-700  font-sans font-[600] text-right pr-[15%]'>President</p>
@@ -32,7 +32,7 @@ export default function committeeHeads() {
         </div>
         <div title='President' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
-            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
+            <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummyjpg.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>
             <p className='text-xl text-stone-700 font-[600] mb-1'>S M Najmul Hossain</p>
             <p className='text-lg text-green-700  font-sans font-[600] text-right pr-[15%]'>Vice President</p>
