@@ -4,7 +4,7 @@ export default function Goal() {
   return (
     <div className='w-4/5 mx-auto min-h-6 sm:mt-28'>
       <p className='w-full text-center font-sans text-stone-700 text-3xl font-bold    my-10 sm:my-20'>Our G<img src='/arrow.png' className='inline w-5 h-5 mx-[1px]'/>als</p>
-        <div className='max-w-1200px flex-col flex xl:flex-col mx-auto gap-3 full'>
+        <div className='max-w-1200px flex-col flex xl:flex-row mx-auto gap-3 full'>
 
           <div className='basis-1/3 p-2 relative text-stone-600 font-sans'>
           <img src='/goal1.jpg' className='absolute border-2 border-green-500 top-0 left-0 w-[80px] rounded-full aspect-square'/>

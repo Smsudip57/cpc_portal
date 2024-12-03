@@ -3,6 +3,9 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '@/components/navbar';
+import Footer from '@/components/footer';
+
+
 
 const NewsletterPage = () => {
   const [newsletters, setNewsletters] = useState([]);
@@ -37,9 +40,9 @@ const NewsletterPage = () => {
   }, [selectedCategory, newsletters]);
 
   return (
-    <div className="text-black pt-16">
+    <div className="text-black pt-16 min-h-screen">
       <Navbar />
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[100vh]">
         <div className="flex flex-col md:flex-row gap-6">
           {/* Left Side: Category Selector */}
           <div className="md:w-1/4 w-full p-4 h-max bg-gray-100 rounded-lg shadow-sm">
@@ -85,6 +88,7 @@ const NewsletterPage = () => {
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

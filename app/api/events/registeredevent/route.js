@@ -6,10 +6,7 @@ import User from '@/models/user';
 
 export async function GET(req) {
   try {
-    // Connect to the database
     await dbConnect();
-
-    // Retrieve token from cookies
     const cookie = req.cookies.get('user')?.value || '';
     const token = cookie.split(';')[0].trim();
 
@@ -20,7 +17,6 @@ export async function GET(req) {
       );
     }
 
-    // Decode JWT token
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -45,19 +41,40 @@ export async function GET(req) {
       });
       
     // Filter events where the user is a participant
-    const userEvents = events.filter(event =>
-        
-        event.participants.includes(decoded.userId)
-      );
+    // const userEvents = events.filter(event =>
+    //   event.participants.some(team => Array.isArray(team) && team.includes(decoded.userId))
+    // );
 
-    if (userEvents.length > 0) {
-      return NextResponse.json({ success: true, events: userEvents });
+    // if (userEvents.length > 0) {
+    //   return NextResponse.json({ success: true, events: userEvents });
+    // }
+    const userEvents = await Promise.all(
+      events.map(async (event) => {
+        const matchedTeam = event.participants.find(
+          (team) => Array.isArray(team) && team.includes(decoded.userId)
+        );
+    
+        if (matchedTeam) {
+          // Populate user data for the matched team
+          const populatedTeam = await User.find({ _id: { $in: matchedTeam } }).select('profile.name profile.avatarUrl');
+          return { ...event.toObject(), matchedTeam: populatedTeam };
+        }
+        return null;
+      })
+    );
+    
+    // Filter out null values (events without matching teams)
+    const filteredUserEvents = userEvents.filter((event) => event !== null);
+    
+    if (filteredUserEvents.length > 0) {
+      return NextResponse.json({ success: true, events: filteredUserEvents });
     }
+    
 
     return NextResponse.json({ success: false, message: 'No ongoing events found for the user' });
 
   } catch (error) {
-    console.error("Error fetching events:", error); // Log the actual error
+    console.error("Error fetching events:", error); 
     return NextResponse.json({
       success: false,
       message: "Failed to fetch events",
