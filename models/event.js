@@ -37,11 +37,10 @@ const eventSchema = new mongoose.Schema({
       type: Number,
     },
     participants: [
-      [{
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
       },
-    ]
     ]
 });
 

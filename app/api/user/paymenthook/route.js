@@ -22,7 +22,6 @@ export async function POST(request) {
     }
     const { type, data } = event;
 
-    // Handle the event
     switch (type) {
         case 'checkout.session.completed':
           const paymentIntent = data.object; 
@@ -51,31 +50,31 @@ export async function POST(request) {
               },
             );
           }else if (details.type === 'event') {
-            // await dbConnect();
-            // const event = await Event.findOne({ _id: details.eventId });
-            // if (Array.isArray(event?.participants)) {
-            //   event.participants = [...new Set([...event.participants, ...details.data])];
-            // } else {
-            //   event.participants = [...new Set([...details.data])];
-            // }
-            // await event.save();
             await dbConnect();
             const event = await Event.findOne({ _id: details.eventId });
-
-            if (!event) {
-              throw new Error('Event not found');
+            if (Array.isArray(event?.participants)) {
+              event.participants = [...new Set([...event.participants, ...details.data])];
+            } else {
+              event.participants = [...new Set([...details.data])];
             }
-            if (!Array.isArray(event.participants)) {
-              event.participants = [];
-            }
-            details.data.forEach((newTeam) => {
-              if (!event.participants.some((existingTeam) => 
-                JSON.stringify(existingTeam) === JSON.stringify(newTeam))) {
-                event.participants.push(newTeam);
-              }
-            });
-
             await event.save();
+            // await dbConnect();
+            // const event = await Event.findOne({ _id: details.eventId });
+
+            // if (!event) {
+            //   throw new Error('Event not found');
+            // }
+            // if (!Array.isArray(event.participants)) {
+            //   event.participants = [];
+            // }
+            // details.data.forEach((newTeam) => {
+            //   if (!event.participants.some((existingTeam) => 
+            //     JSON.stringify(existingTeam) === JSON.stringify(newTeam))) {
+            //     event.participants.push(newTeam);
+            //   }
+            // });
+
+            // await event.save();
 
           }
           }
