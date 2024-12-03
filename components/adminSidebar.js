@@ -49,7 +49,7 @@ export default function Sidebar() {
       >
           Publish Events
         </Button>
-        <Button
+        {/* <Button
         variant="text"
         color="inherit"
         className="text-[#027223] text-md font-semibold w-full"
@@ -57,7 +57,7 @@ export default function Sidebar() {
         onClick={() => router.replace('/admin/events-participants')}
       >
           Events Participants
-        </Button>
+        </Button> */}
         <Button
         variant="text"
         color="inherit"
