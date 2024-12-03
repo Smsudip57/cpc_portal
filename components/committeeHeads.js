@@ -2,11 +2,11 @@ import React from 'react'
 
 export default function committeeHeads() {
   return (
-    <div className='w-full py-40'>
+    <div className='w-full py-20 sm:py-40'>
       <p className='w-full text-3xl text-center py-10 pb-16 font-bold text-stone-700'>Commi<span className='text-[#FF3115]'>tt</span>ee
       </p>
-        <div className='w-4/5 mx-auto flex justify-between'>
-        <div title='Club Advisor' className='basis-[30%] flex justify-center'>
+        <div className='w-4/5 mx-auto flex flex-col lg:flex-row gap-10 lg:gap-0 items-center  justify-between'>
+        <div title='Club Advisor' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
             <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>
@@ -18,7 +18,7 @@ export default function committeeHeads() {
             </p>
             </div>
         </div>
-        <div title='President' className='basis-[30%] flex justify-center'>
+        <div title='President' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
             <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>
@@ -30,7 +30,7 @@ export default function committeeHeads() {
             </p>
             </div>
         </div>
-        <div title='President' className='basis-[30%] flex justify-center'>
+        <div title='President' className='basis-[30%] max-w-[350px] flex justify-center'>
             <div className='flex flex-col items-center gap-5'>
             <img className='aspect-square w-[200px] border-b-8 border-[#FF3115]' src='/dummy.jpg' width={100} style={{}} />
             <div className='w-4/5 self-right'>

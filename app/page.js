@@ -38,7 +38,7 @@ export default function Home() {
     <div className=" relative"   title="cpcportal_home">
       <Navbar />
       <Homeview />
-      <div className='w-full aspect-[2.9/1] flex justify-center items-center'>
+      <div className='w-full aspect-[2/1] sm:aspect-[2.9/1] flex justify-center items-center'>
       <Swiper
         style={{
           '--swiper-navigation-color': '#fff',
@@ -90,7 +90,7 @@ export default function Home() {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="mySwiper h-28"
+        className="mySwiper h-16 sm:h-28"
       >
         {
           Array.from({ length: 7 }).map((_, index) => (

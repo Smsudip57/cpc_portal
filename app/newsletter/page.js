@@ -37,54 +37,53 @@ const NewsletterPage = () => {
   }, [selectedCategory, newsletters]);
 
   return (
-    <div className='mx-auto text-black'>
-        <Navbar/>
-      <div className='max-w-6xl mx-auto p-6 relative'>
-      <div className="flex pt-16 justify-center">
-        {/* Left Side: Category Selector */}
-        <div className="w-1/4 p-4 bg-gray-100 h-max">
-          <h3 className="text-lg font-semibold mb-4">Categories</h3>
-          <ul>
-            {categories.map((category) => (
-              <li
-                key={category}
-                className={`cursor-pointer py-2 px-4 rounded hover:bg-gray-200 ${category === selectedCategory ? 'bg-gray-300' : ''}`}
-                onClick={() => setSelectedCategory(category)}
-              >
-                {category}
-              </li>
-            ))}
-          </ul>
-        </div>
+    <div className="text-black pt-16">
+      <Navbar />
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col md:flex-row gap-6">
+          {/* Left Side: Category Selector */}
+          <div className="md:w-1/4 w-full p-4 h-max bg-gray-100 rounded-lg shadow-sm">
+            <h3 className="text-lg font-semibold mb-4">Categories</h3>
+            <ul>
+              {categories.map((category) => (
+                <li
+                  key={category}
+                  className={`cursor-pointer py-2 px-4 rounded hover:bg-gray-200 ${category === selectedCategory ? 'bg-gray-300' : ''}`}
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        {/* Right Side: Newsletters Display */}
-        <div className="w-3/4 p-4">
-          <h3 className="text-xl font-semibold mb-4">Newsletters</h3>
-          <div className="flex flex-col gap-6">
-            {filteredNewsletters.map((newsletter) => (
-              <div key={newsletter._id} className="border w-full p-8 rounded-lg shadow-md">
-                <h4 className="text-2xl font-semibold">{newsletter.title}</h4>
-                <div className='flex justify-between items-center py-6'>
-                    <div className='flex justify-center items-center gap-1'>
+          {/* Right Side: Newsletters Display */}
+          <div className="md:w-3/4 w-full">
+            <h3 className="text-xl font-semibold mb-4">Newsletters</h3>
+            <div className="flex flex-col gap-6">
+              {filteredNewsletters.map((newsletter) => (
+                <div key={newsletter._id} className="border p-4 md:p-8 rounded-lg shadow-md flex flex-col">
+                  <h4 className="text-lg md:text-2xl font-semibold mb-2">{newsletter.title}</h4>
+                  <div className="flex items-center gap-2 my-6">
                     <img
-                  src={newsletter?.createdBy?.profile?.avatarUrl === 'https://default-avatar-url.com' 
-                    ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png' 
-                    : newsletter?.createdBy?.profile?.avatarUrl}
-                  alt={newsletter?.createdBy?.profile?.name}
-                  className="w-8 h-8 rounded-full mr-4"
-                />
-                <p className="text-sm text-gray-600">{newsletter.createdBy.profile.name}</p>
-                    </div>
-                <div className="mt-2 text-sm text-gray-500">Published on {new Date(newsletter.publishedAt).toLocaleDateString()}</div>
-                {console.log(newsletter)}
+                      src={newsletter?.createdBy?.profile?.avatarUrl === 'https://default-avatar-url.com'
+                        ? 'https://cdn-icons-png.flaticon.com/512/1144/1144760.png'
+                        : newsletter?.createdBy?.profile?.avatarUrl}
+                      alt={newsletter?.createdBy?.profile?.name}
+                      className="w-10 h-10 rounded-full"
+                    />
+                    <p className="text-sm text-gray-600">{newsletter.createdBy.profile.name}</p>
+                  </div>
+                  <img src={newsletter?.image} alt={newsletter.title} className="w-full h-40 object-cover rounded-md mb-4" />
+                  <p className="text-sm text-gray-500 my-4">Published on {new Date(newsletter.publishedAt).toLocaleDateString()}</p>
+                  <p className="text-sm text-gray-700 flex-grow" style={{ whiteSpace: 'pre-wrap' }}>
+                    {newsletter.content}
+                  </p>
                 </div>
-                <img src={newsletter?.image} alt={newsletter.title} className="w-full mb-4" />
-                <p className='p-4' style={{whiteSpace: 'pre-wrap'}}>{newsletter.content}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </div>
       </div>
     </div>
   );

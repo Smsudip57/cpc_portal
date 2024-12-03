@@ -66,7 +66,7 @@ export default function Navbar() {
         <p className='w-16 overflow-visible text-nowrap cursor-pointer text-xl font-[600] text-white flex gap-3 items-center'>
         <img className='w-[45px] rounded-full' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s' width={100} />
           {/* <img className='w-[50px] bg-white' src='/logo.png' width={100} />  */}
-          DIU-Computer Programming Club</p></Link>
+          <span className='sm:block hidden'>DIU-Computer Programming Club</span><span className='sm:hidden block'>CPC</span></p></Link>
         <div className="flex gap-5 items-center cursor-pointer absolute left-[50%] transform -translate-x-[50%]"
         >
             {/* <img className='w-[45px] rounded-full' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s' width={100} /> */}

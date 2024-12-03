@@ -69,15 +69,15 @@ export default function Login() {
             DIU Computer Programming Club
           </p>
           <div className="logo flex gap-5">
-            <img
-              className="w-[130px]"
-              src="https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png"
+          <img
+              className="w-[130px] rounded-full"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTD6q1HpkfBZejUccvDixaMKhLxE-I7JCsQFQ&s"
               width={100}
               alt="Logo 1"
             />
             <img
-              className="w-[130px]"
-              src="https://casamedia.com/wp-content/uploads/2023/04/adidas-1024x683.png"
+              className="w-[150px]"
+              src="/logo.png"
               width={100}
               alt="Logo 2"
             />

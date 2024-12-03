@@ -100,6 +100,7 @@ export const POST = async (req) => {
     // Construct the file URL (relative to the public folder)
     // const imageUrl = `/${filename}`;
 
+    console.log(start, end, lastdate);
         
     function validateDates(start, end, lastdate) {
       const today = new Date();
@@ -108,7 +109,7 @@ export const POST = async (req) => {
       const lastDate = new Date(lastdate);
 
       if (endDate < today) return false;
-      if (startDate >= endDate) return false;
+      if (startDate <= endDate) return false;
       if (lastDate <= startDate) return false;
 
       return true;
